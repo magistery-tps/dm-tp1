@@ -3,7 +3,7 @@
 ## Enlaces
 *  [GDrive](https://drive.google.com/drive/folders/1gMuZizej1ZyM3l7MYInAvXubY6XkzXMp?usp=sharing)
 *  [TP - Enunciado](https://github.com/mastery-tps/dm-tp1/blob/main/docs/enunciado-tp.pdf)
-
+*  [Tutorial de GIT](https://youtu.be/kEPF-MWGq1w)
 
 ## Descargar repositorio
 
