@@ -5,6 +5,15 @@
 *  [TP - Enunciado](https://github.com/mastery-tps/dm-tp1/blob/main/docs/enunciado-tp.pdf)
 
 
+## Descargar repositorio
+
+
+```bash
+$ git clone 
+```
+
+
+
 ## Importar dataset a mongodb
 
 **Paso 1**: Desde la consola y parados en el dorectorio del proyecto cambiamos al directorio dataset
