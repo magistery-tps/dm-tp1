@@ -1,7 +1,7 @@
 # Datamining  - TP 1 - Preprocesamiento de datos
 
 ## Enlaces
-*  [GDrive](https://drive.google.com/drive/folders/1gMuZizej1ZyM3l7MYInAvXubY6XkzXMp?usp=sharing)
+*  [GDrive](https://drive.google.com/drive/folders/1CxpEWQaq4qme6IQqG70N6eD2KVy7kMdt?usp=sharing)
 *  [TP - Enunciado](https://github.com/mastery-tps/dm-tp1/blob/main/docs/enunciado-tp.pdf)
 *  [Tutorial de GIT](https://youtu.be/kEPF-MWGq1w) ([Resumen](https://youtu.be/kEPF-MWGq1w?t=1031))
 
