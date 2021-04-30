@@ -9,6 +9,7 @@
 
 ```bash
 $ git clone https://github.com/mastery-tps/dm-tp1.git
+$ cd dm-tp1
 ```
 
 ## Importar dataset a mongodb
