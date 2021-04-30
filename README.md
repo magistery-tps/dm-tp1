@@ -7,6 +7,10 @@
 
 ## Descargar repositorio
 
+**Paso 1**: Instalar [git](https://git-scm.com/downloads)
+
+**Paso 2**:  Ahora si  clonamos el repositorio.
+
 ```bash
 $ git clone https://github.com/mastery-tps/dm-tp1.git
 $ cd dm-tp1
