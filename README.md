@@ -33,7 +33,7 @@ $ cd spotify
 ```
 **Paso 3**: Antes de segir en necesario tener instalado [mongodb](https://www.mongodb.com/try/download/community) y [mongodb-tools](https://www.mongodb.com/try/download/database-tools).
 
-**Paso 4**: Importamos ambas colecciones en la base de datos:
+**Paso 4**: Importamos todas las colecciones en la base de datos:
 
 ```bash
 $ mongoimport -d spotify -c track_features --file track_features.json --jsonArray
