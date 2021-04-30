@@ -7,12 +7,9 @@
 
 ## Descargar repositorio
 
-
 ```bash
-$ git clone 
+$ git clone https://github.com/mastery-tps/dm-tp1.git
 ```
-
-
 
 ## Importar dataset a mongodb
 
