@@ -31,7 +31,7 @@ $ cd spotify
 ```bash
 $ mongoimport -d spotify -c track_features --file track_features.json
 $ mongoimport -d spotify -c track_weekly_top_200 --file track_weekly_top_200.json
-$ mongoimport -d spotify -c countries --file countries.json
+$ mongoimport -d spotify -c countries --file countries.json  --jsonArray
 ```
 
 
