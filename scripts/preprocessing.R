@@ -1,14 +1,14 @@
 library(pacman)
-p_load(stringi, tidyverse, this.path)
+p_load(stringi, tidyverse, this.path, readr)
 source(paste(this.path::this.dir(), '/lib/import.R', sep=''))
 
 import('lib/data-access')
 
 
 track_real_features.num <- get_collection('track_real_features.num')
-track_features <- as.data.frame(track_features_col$find('{}'))
 
+# Veamos las distribuciones de cada variable numérica:
 
-track_features.numeric <- track_features %>% select(where(is.numeric))
+result <- track_real_features.num$find(fields = '{ "danceability" : 1}')
 
-names(track_features.numeric)
+hist(result $danceability)

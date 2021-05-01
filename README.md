@@ -52,3 +52,22 @@ $ mongoimport -d spotify -c countries --file countries.json --jsonArray
 
 [Ver views.js](https://github.com/mastery-tps/dm-tp1/blob/main/database/views.js)
 
+## Start/Stop MongoDB
+
+### Linux:
+
+```bash
+$ sudo systemctl restart mongod
+```
+
+### MacOS
+
+```bash
+$ brew services start mongodb-community
+$ brew services stop mongodb-community
+```
+
+### Windows
+
+?
+

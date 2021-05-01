@@ -140,3 +140,12 @@ db.createView(
     ]
 );
 
+
+db.track_real_features.num.aggregate( [
+    {
+      $bucketAuto: { groupBy: "$danceability", buckets: 100 }
+    }
+ ]);
+
+ mongod --setParameter internalQueryMaxBlockingSortMemoryUsageBytes=335544320
+
