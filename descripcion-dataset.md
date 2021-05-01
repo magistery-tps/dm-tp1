@@ -5,25 +5,17 @@
 * **number**:
     The number of the track. If an album has several discs, the track
     number is the number on the specified disc.
-
 * **name**: Track name.
-
 * **snd_preview**: Track sound preview.
-
 * **url**: Track spotify url.
-
 * **album**: Track album.
-
 * **artist**: Track artist.
-
 * **album_release_date**
-
 * **danceability**:
     Danceability describes how suitable a track is for dancing based
     on a combination of musical elements including tempo, rhythm 
     stability, beat strength, and overall regularity. A value of 0.0 
     is least danceable and 1.0 is most danceable.
-
 * **energy**:
     Energy is a measure from 0.0 to 1.0 and represents a perceptual 
     measure of intensity and activity. Typically, energetic tracks 
@@ -31,14 +23,12 @@
     energy, while a Bach prelude scores low on the scale. Perceptual 
     features contributing to this attribute include dynamic range, 
     perceived loudness, timbre, onset rate, and general entropy.
-
 * **loudness**:
     The overall loudness of a track in decibels (dB). Loudness values
     are averaged across the entire track and are useful for comparing
     relative loudness of tracks. Loudness is the quality of a sound
     that is the primary psychological correlate of physical strength
     (amplitude). Values typical range between -60 and 0 db.
-
 * **speechiness**:
     Speechiness detects the presence of spoken words in a track. The more
     exclusively speech-like the recording (e.g. talk show, audio book,
@@ -48,7 +38,6 @@
     music and speech, either in sections or layered, including such cases
     as rap music. Values below 0.33 most likely represent music and other
     non-speech-like tracks.
-
 * **acousticness**:
     A confidence measure from 0.0 to 1.0 of whether the track is acoustic.
     1.0 represents high confidence the track is acoustic.
