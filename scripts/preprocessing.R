@@ -5,7 +5,7 @@ source(paste(this.path::this.dir(), '/lib/import.R', sep=''))
 import('lib/data-access')
 
 
-track_features_col <- get_collection('track_features')
+track_real_features.num <- get_collection('track_real_features.num')
 track_features <- as.data.frame(track_features_col$find('{}'))
 
 

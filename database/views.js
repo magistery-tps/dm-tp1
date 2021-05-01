@@ -118,3 +118,25 @@ db.createView(
     ]
 );
 
+db.createView(
+    'track_real_features.num',
+    'track_features',
+    [
+        {
+            $project: {
+                danceability: 1,
+                energy: 1,
+                loudness: 1,
+                speechiness: 1,
+                acousticness: 1,
+                instrumentalness: 1,
+                liveness: 1,
+                valence: 1,
+                tempo: 1,
+                time_signature: 1,
+                duration_ms : 1,
+            }
+        }
+    ]
+);
+
