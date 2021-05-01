@@ -48,5 +48,6 @@ $ mongoimport -d spotify -c countries --file countries.json --jsonArray
 ```
 
 ## Vistas y nuevas colecciones
-*  [Ver ](https://github.com/mastery-tps/dm-tp1/blob/main/database/views.js)
+
+[Ver views.js](https://github.com/mastery-tps/dm-tp1/blob/main/database/views.js)
 
