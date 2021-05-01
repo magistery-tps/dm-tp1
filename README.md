@@ -20,7 +20,7 @@ $ cd dm-tp1
 
 ## Importar dataset a mongodb
 
-**Paso 1**: Desde la consola y parados en el dorectorio del proyecto cambiamos al directorio dataset
+**Paso 1**: Desde la consola y parados en el directorio del proyecto, cambiamos al directorio `dataset`:
 
 ```bash
 $ cd dataset
@@ -37,7 +37,7 @@ $ unrar x spotify.part01.rar
 ```bash
 $ cd spotify
 ```
-**Paso 3**: Antes de segir en necesario tener instalado [mongodb](https://www.mongodb.com/try/download/community) y [mongodb-tools](https://www.mongodb.com/try/download/database-tools).
+**Paso 3**: Antes de seguir es necesario tener instalado [mongodb](https://www.mongodb.com/try/download/community) y [mongodb-tools](https://www.mongodb.com/try/download/database-tools).
 
 **Paso 4**: Importamos todas las colecciones en la base de datos:
 
