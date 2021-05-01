@@ -15,12 +15,11 @@ output:
 Importamos la librerias necesarias
 ```{r}
 library(pacman)
-p_load(stringi, tidyverse, this.path, readr)
-source(paste(this.path::this.dir(), '/../lib/import.R', sep=''))
-
-import('../lib/data-access')
-import('../lib/plot')
+p_load(stringi, tidyverse,  readr)
+source('../lib/data-access.R')
+source('../lib/plot.R')
 ```
+
 
 Veamos las distribuciones de cada variable numérica:
 
@@ -33,10 +32,10 @@ get_collection_fields <- function(collection_name, field_name) {
   collection$find(fields = projection)
 }
 
-result <- get_collection_fields('track_real_features.num', 'danceability')
+result <- get_collection_fields('track_features_top_1', 'danceability')
 ```
 
-```{r}
+```{r fig1, fig.height = 6, fig.width = 9, fig.align = "center", include = TRUE}
 p <- gplot_hist(result$danceability, name="Indice de Vailabilidad", binwidth=0.06)
 ggplotly(p)
 ```
