@@ -45,6 +45,11 @@ $ mongoimport -d spotify -c track_weekly_top_200 --file track_weekly_top_200.jso
 $ mongoimport -d spotify -c countries --file countries.json --jsonArray
 ```
 
+## Agregar Indices
+
+```javascript
+db.countries.createIndex({ "code": 1 }, { unique: true });
+```
 
 
 
