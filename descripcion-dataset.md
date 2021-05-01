@@ -66,15 +66,15 @@
 
 ## track_weekly_top_200
 
-* week_start: Begin of top 200 track week.
-* week_end: End of top 200 track week.
-* position: Track weekly top 200 position.
-* track: Track name.
-* artist: Artist name.
-* reproductions:  Track number of reproductions.
-* url: Track spotify url.
+* **week_start**: Begin of top 200 track week.
+* **week_end**: End of top 200 track week.
+* **position**: Track weekly top 200 position.
+* **track**: Track name.
+* **artist**: Artist name.
+* **reproductions**:  Track number of reproductions.
+* **url**: Track spotify url.
 
 ## countries
 
-* code
-* name
+* **code**
+* **name**
