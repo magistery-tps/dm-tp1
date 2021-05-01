@@ -62,35 +62,31 @@ db.track_weekly_top_200.aggregate([
     {$out: "charts_avg"}
 ])
 
-db.createView(
-    'track_weekly_top_1',
-    'track_weekly_top_200',
-    [
-        {
-            $match: { "position": { $in: [1]} }
-        }
-    ]
-);
 
-db.createView(
-    'track_weekly_top_10',
-    'track_weekly_top_200',
-    [
-        {
-            $match: { "position": { $in: [1, 2, 3, 4, 5, 6, 7, 8, 9 , 10]} }
-        }
-    ]
-);
-
-db.createView(
-    'track_weekly_top_5',
-    'track_weekly_top_200',
-    [
-        {
-            $match: { "position": { $in: [1, 2, 3, 4, 5]} }
-        }
-    ]
-);
+// Top 1 sin duplicados (157)
+db.track_weekly_top_200.aggregate([
+    { $match: { "position": { $in: [1]} } },
+    { 
+       $group: {
+           _id: { 
+               position:      "$position",
+               week_start:    "$week_start",
+               week_end:      "$week_end",
+               track:         "$track",
+               artist:        "$artist",
+               reproductions: "$reproductions"
+           },
+            position:       { $last : "$position" },
+            week_start:     { $last : "$week_start" },
+            week_end:       { $last : "$week_end" },
+            track:          { $last : "$track" },
+            artist:         { $last : "$artist" },
+            reproductions:  { $last : "$reproductions" }
+       }
+    },
+    { $out: "track_weekly_top_1" }
+])
+db.track_weekly_top_1.createIndex({ "artist": 1 });
 //
 //
 //
