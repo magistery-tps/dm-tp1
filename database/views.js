@@ -24,6 +24,46 @@ db.createView(
         }
     ]
 );
+
+db.createView(
+    'artist_chats_avg',
+    'track_weekly_top_200',
+    [
+        {
+            $group: {
+                _id: "$artist", 
+                avg_position: { $avg: "$position" },
+                avg_reproductions:  { $avg: "$reproductions"},
+            }
+        },
+        {
+            $project: {
+                _id: 0,
+                artist: "$_id",
+                avg_position: "$avg_position",
+                avg_reproductions: "$avg_reproductions"
+            }  
+        }
+    ]
+);
+
+
+db.track_weekly_top_200.aggregate([
+    {$group: {_id: "$Artist", 
+              avg_position: {$avg: "$Position"},
+              avg_streams: {$avg: "$Streams"},
+              }},
+    {$project: {
+          _id: 0,
+          artist_name: "$_id",
+          avg_position: "$avg_position",
+          avg_streams: "$avg_streams"}  
+        },
+    {$out: "charts_avg"}
+])
+
+
+
 //
 //
 //
