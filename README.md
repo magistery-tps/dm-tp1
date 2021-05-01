@@ -1,11 +1,10 @@
 # Datamining  - TP 1 - Preprocesamiento de datos
 
 ## Enlaces
-*  [GDrive](https://drive.google.com/drive/folders/1CxpEWQaq4qme6IQqG70N6eD2KVy7kMdt?usp=sharing){:target="_blank" rel="noopener"}
-*  [TP - Enunciado](https://github.com/mastery-tps/dm-tp1/blob/main/docs/enunciado-tp.pdf){:target="_blank" rel="noopener"}
-*  [Tutorial de GIT](https://youtu.be/kEPF-MWGq1w){:target="_blank" rel="noopener"} ([Resumen](https://youtu.be/kEPF-MWGq1w?t=1031){:target="_blank" rel="noopener"})
-*  [Preguntas](https://docs.google.com/document/d/1HvNfQMn5bhCcMa0JVHw9G9lG14zjBXNReRUnXjfSEh0/edit?usp=sharing){:target="_blank" rel="noopener"}
-
+*  [GDrive](https://drive.google.com/drive/folders/1CxpEWQaq4qme6IQqG70N6eD2KVy7kMdt?usp=sharing)
+*  [TP - Enunciado](https://github.com/mastery-tps/dm-tp1/blob/main/docs/enunciado-tp.pdf)
+*  [Tutorial de GIT](https://youtu.be/kEPF-MWGq1w) ([Resumen](https://youtu.be/kEPF-MWGq1w?t=1031)
+*  [Preguntas](https://docs.google.com/document/d/1HvNfQMn5bhCcMa0JVHw9G9lG14zjBXNReRUnXjfSEh0/edit?usp=sharing)
 ## Descargar repositorio
 
 **Paso 1**: Instalar [git](https://git-scm.com/downloads).
