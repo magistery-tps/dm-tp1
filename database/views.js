@@ -141,62 +141,27 @@ db.createView(
                 key: 1,
                 mode: 1
             }
-        }
+        } //, { $limit: 200 }
     ]
 );
 
 db.createView(
-    'track_real_features.num',
+    'track_real_feature_200',
     'track_features',
     [
-        {
-            $project: {
-                danceability: 1,
-                energy: 1,
-                loudness: 1,
-                speechiness: 1,
-                acousticness: 1,
-                instrumentalness: 1,
-                liveness: 1,
-                valence: 1,
-                tempo: 1,
-                time_signature: 1,
-                duration_ms : 1,
-            }
-        }
+        { $limit: 200 }
     ]
 );
 
-db.createView(
-    'track_real_features.num',
-    'track_features',
-    [
-        {
-            $project: {
-                danceability: 1,
-                energy: 1,
-                loudness: 1,
-                speechiness: 1,
-                acousticness: 1,
-                instrumentalness: 1,
-                liveness: 1,
-                valence: 1,
-                tempo: 1,
-                time_signature: 1,
-                duration_ms : 1,
-            }
-        }
-    ]
-);
-
+// Join del top 1 con track features
 
 db.track_features.aggregate([
     {
       $lookup:
         {
-          from: "track_weekly_top_10",
-          localField: "artist", 
-          foreignField: "artist",
+          from: "track_weekly_top_1",
+          foreignField: "track",
+          localField: "name", 
           as: "charts"
         }
    },
@@ -213,19 +178,19 @@ db.track_features.aggregate([
             tempo: 1,
             time_signature: 1,
             duration_ms: 1,
-            week_start: "$charts.week_start",
-            week_end: "$charts.week_end",
-            position: "$charts.position",
-            reproductions: "$charts.reproductions"
+            week_start:    {"$arrayElemAt": ["$charts.week_start", 0]},
+            week_end:      {"$arrayElemAt": ["$charts.week_end", 0]},
+            position:      {"$arrayElemAt": ["$charts.position", 0]},
+            reproductions: {"$arrayElemAt": ["$charts.reproductions", 0]}
         }
-    }
-])
-
-
-
-db.track_real_features.num.aggregate( [
+    },
     {
-      $bucketAuto: { groupBy: "$danceability", buckets: 100 }
-    }
- ]);
-
+        $match: { 
+            week_start:     { $exists:  true },
+            week_end:      { $exists:  true },
+            position:      { $exists:  true },
+            reproductions: { $exists:  true }
+        }
+    },
+    {$out: "track_features:_top_1"}
+])
