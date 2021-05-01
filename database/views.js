@@ -62,8 +62,35 @@ db.track_weekly_top_200.aggregate([
     {$out: "charts_avg"}
 ])
 
+db.createView(
+    'track_weekly_top_1',
+    'track_weekly_top_200',
+    [
+        {
+            $match: { "position": { $in: [1]} }
+        }
+    ]
+);
 
+db.createView(
+    'track_weekly_top_10',
+    'track_weekly_top_200',
+    [
+        {
+            $match: { "position": { $in: [1, 2, 3, 4, 5, 6, 7, 8, 9 , 10]} }
+        }
+    ]
+);
 
+db.createView(
+    'track_weekly_top_5',
+    'track_weekly_top_200',
+    [
+        {
+            $match: { "position": { $in: [1, 2, 3, 4, 5]} }
+        }
+    ]
+);
 //
 //
 //
@@ -140,12 +167,65 @@ db.createView(
     ]
 );
 
+db.createView(
+    'track_real_features.num',
+    'track_features',
+    [
+        {
+            $project: {
+                danceability: 1,
+                energy: 1,
+                loudness: 1,
+                speechiness: 1,
+                acousticness: 1,
+                instrumentalness: 1,
+                liveness: 1,
+                valence: 1,
+                tempo: 1,
+                time_signature: 1,
+                duration_ms : 1,
+            }
+        }
+    ]
+);
+
+
+db.track_features.aggregate([
+    {
+      $lookup:
+        {
+          from: "track_weekly_top_10",
+          localField: "artist", 
+          foreignField: "artist",
+          as: "charts"
+        }
+   },
+   {
+        $project: {
+            danceability: 1, 
+            energy: 1,
+            loudness: 1,
+            speechiness: 1,
+            acousticness: 1,
+            instrumentalness: 1,
+            liveness: 1,
+            valence: 1,
+            tempo: 1,
+            time_signature: 1,
+            duration_ms: 1,
+            week_start: "$charts.week_start",
+            week_end: "$charts.week_end",
+            position: "$charts.position",
+            reproductions: "$charts.reproductions"
+        }
+    }
+])
+
+
 
 db.track_real_features.num.aggregate( [
     {
       $bucketAuto: { groupBy: "$danceability", buckets: 100 }
     }
  ]);
-
- mongod --setParameter internalQueryMaxBlockingSortMemoryUsageBytes=335544320
 
