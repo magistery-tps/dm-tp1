@@ -5,6 +5,8 @@
 *  [TP - Enunciado](https://github.com/mastery-tps/dm-tp1/blob/main/docs/enunciado-tp.pdf)
 *  [Tutorial de GIT](https://youtu.be/kEPF-MWGq1w) ([Resumen](https://youtu.be/kEPF-MWGq1w?t=1031))
 *  [Preguntas](https://docs.google.com/document/d/1HvNfQMn5bhCcMa0JVHw9G9lG14zjBXNReRUnXjfSEh0/edit?usp=sharing)
+*  [Descripción del dataset](https://github.com/mastery-tps/dm-tp1/blob/main/descripcion-dataset.md)
+
 ## Descargar repositorio
 
 **Paso 1**: Instalar [git](https://git-scm.com/downloads).
