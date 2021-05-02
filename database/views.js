@@ -151,6 +151,25 @@ db.track_features.aggregate([
     {$out: "track_features_top_1"}
 ]);
 
+// Solo features numericos del top 1
+db.track_features_top_1.aggregate([
+    {
+         $project: {
+             danceability: 1, 
+             energy: 1,
+             loudness: 1,
+             speechiness: 1,
+             acousticness: 1,
+             instrumentalness: 1,
+             liveness: 1,
+             valence: 1,
+             tempo: 1,
+             time_signature: 1,
+             duration_ms: 1
+         }
+     },
+     {$out: "track_features_top_1_num"}
+ ]);
 
 
 // Join del top 10 con track features (33017)

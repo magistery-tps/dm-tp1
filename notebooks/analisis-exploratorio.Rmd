@@ -144,4 +144,37 @@ plot_hist_collection(
 )
 ```
 
+## Correlaciones
+
+```{r}
+track_features_top_1_num_colllection <- get_collection('track_features_top_1_num')
+num_features <- track_features_top_1_num_colllection$find()
+num_features.scaled <- num_features %>% mutate_all(scale)
+```
+
+```{r}
+names(num_features.scaled)
+```
+
+```{r fig13, fig.height = 6, fig.width = 9, fig.align = "center", include = TRUE}
+p <- num_features.scaled %>%
+      pivot_longer(
+        ., 
+        cols = names(num_features), 
+        names_to = "Variables", 
+        values_to = "Frecuencia"
+      ) %>%
+      ggplot(aes(x = Variables, y = Frecuencia, fill = Variables)) +
+      geom_boxplot(width=0.2)
+
+ggplotly(p)
+```
+
+
+```{r fig11, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
+plot_heatmap(cov(num_features.scaled))
+```
+
+
+
 
