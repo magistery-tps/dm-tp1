@@ -156,7 +156,7 @@ num_features.scaled <- num_features %>% mutate_all(scale)
 names(num_features.scaled)
 ```
 
-```{r fig13, fig.height = 6, fig.width = 9, fig.align = "center", include = TRUE}
+```{r fig13, fig.height = 6, fig.width = 11.5, fig.align = "center", include = TRUE}
 p <- num_features.scaled %>%
       pivot_longer(
         ., 
