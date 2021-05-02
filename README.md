@@ -49,10 +49,16 @@ $ cd spotify
 ```bash
 $ mongoimport -d spotify -c track_features        --file track_features.json        --jsonArray
 $ mongoimport -d spotify -c track_weekly_top_200  --file track_weekly_top_200.json  --jsonArray
+$ mongoimport -d spotify -c countries             --file countries.json             --jsonArray
+```
+
+**Paso 5**: Cargamos colecciones que son joins de la anteriores:
+
+```bash
+$ cd ..
 $ mongoimport -d spotify -c track_features_top_1  --file track_features_top_1.json  --jsonArray
 $ mongoimport -d spotify -c track_features_top_10 --file track_features_top_10.json --jsonArray
 $ mongoimport -d spotify -c track_features_top_50 --file track_features_top_50.json --jsonArray
-$ mongoimport -d spotify -c countries             --file countries.json             --jsonArray
 ```
 
 ## Vistas y nuevas colecciones
