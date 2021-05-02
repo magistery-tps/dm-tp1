@@ -1,6 +1,8 @@
 library(pacman)
 p_load(mongolite)
 
+import('plot')
+
 get_collection <- function(name, db="spotify") { 
   mongo(collection=name, db = db)
 }
@@ -19,3 +21,14 @@ get_freq_table <- function(collection_name) {
     fields = '{"_id": false, "frequency": true, "value": true}'
   )
 }
+
+plot_hist_collection <- function(collection_name, name, binwidth=0.5) {
+  gplot_hist_from_freq_table(
+    get_freq_table(collection_name),
+    name=name,
+    binwidth=binwidth
+  )
+}
+
+
+

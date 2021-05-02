@@ -3,11 +3,65 @@ p_load(this.path, ggplot2)
 source(paste(this.path::this.dir(), '/../lib/import.R', sep=''))
 
 import('../lib/data-access')
-import('../lib/data-frame')
 import('../lib/plot')
 
-gplot_hist_from_freq_table(
-  get_freq_table('hist_top_10_danceability'),
-  name="Danceability",
-  binwidth=0.05
+plot_hist_collection(
+  collection_name = 'hist_top_10_danceability',
+  name            = 'Danceability',
+  binwidth        = 0.05
 )
+
+plot_hist_collection(
+  collection_name = 'hist_top_10_energy',
+  name            = 'Energy',
+  binwidth        = 0.05
+)
+
+plot_hist_collection(
+  collection_name = 'hist_top_10_loudness',
+  name            = 'Loudness',
+  binwidth        = 1
+)
+
+plot_hist_collection(
+  collection_name = 'hist_top_10_speechiness',
+  name            = 'Speechiness',
+  binwidth        = 0.03
+)
+
+plot_hist_collection(
+  collection_name = 'hist_top_10_acousticness',
+  name            = 'Acousticness',
+  binwidth        = 0.05
+)
+
+plot_hist_collection(
+  collection_name = 'hist_top_10_instrumentalness',
+  name            = 'Instrumentalness',
+  binwidth        = 0.1
+)
+
+plot_hist_collection(
+  collection_name = 'hist_top_10_liveness',
+  name            = 'Liveness',
+  binwidth        = 0.05
+)
+
+plot_hist_collection(
+  collection_name = 'hist_top_10_valence',
+  name            = 'Valence',
+  binwidth        = 0.05
+)
+
+plot_hist_collection(
+  collection_name = 'hist_top_10_tempo',
+  name            = 'Tempo',
+  binwidth        = 7
+)
+
+
+
+
+
+
+

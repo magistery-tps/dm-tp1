@@ -261,7 +261,7 @@ db.track_features_top_10.aggregate([
 
 
 // Histograma de loudness
-db.track_features_top_200.aggregate([
+db.track_features_top_10.aggregate([
     { 
         $bucketAuto: { 
             groupBy: "$loudness", 

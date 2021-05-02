@@ -2,6 +2,7 @@ library(pacman)
 p_load(stringi, tidyverse, modeest, plotly)
 options(warn=-1)
 
+import('../data-frame')
 
 
 # -----------------------------------------------------------------------------
@@ -140,17 +141,17 @@ gplot_hist_from_freq_table <- function(
       size=line_size
     ) + 
     geom_vline(
-        aes(xintercept = max(freq_table$value), color='Máximo'), 
+        aes(xintercept = max(value), color='Máximo'), 
         linetype=linetype, 
         size=line_size
     ) +
     geom_vline(
-        aes(xintercept = min(freq_table$value), color='Mínimo'), 
+        aes(xintercept = min(value), color='Mínimo'), 
         linetype=linetype, 
         size=line_size
     ) +
     geom_vline(
-        aes(xintercept = median(freq_table$value), color='Mediana'),
+        aes(xintercept = median(value), color='Mediana'),
         linetype=linetype,
         size=line_size
     )

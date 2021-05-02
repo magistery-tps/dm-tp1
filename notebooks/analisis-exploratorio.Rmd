@@ -26,17 +26,21 @@ Veamos las distribuciones de cada variable numérica:
 ### Danceability
 
 ```{r fig1, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
-result <- get_collection_fields('track_features_top_10', 'danceability')
-p <- gplot_hist(result$danceability, name="Indice de Vailabilidad", binwidth=0.03)
-ggplotly(p)
+gplot_hist_from_freq_table(
+  get_freq_table('hist_top_10_danceability'),
+  name="Danceability",
+  binwidth=0.05
+)
 ```
 
 ### Energy
 
 ```{r fig2, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
-result <- get_collection_fields('track_features_top_10', 'energy')
-p <- gplot_hist(result$energy, name="Energy", binwidth=0.03)
-ggplotly(p)
+gplot_hist_from_freq_table(
+  get_freq_table('hist_top_10_energy'),
+  name="Energy",
+  binwidth=0.05
+)
 ```
 
 ### Loudness
