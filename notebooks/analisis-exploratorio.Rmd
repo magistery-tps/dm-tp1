@@ -25,25 +25,84 @@ Veamos las distribuciones de cada variable numérica:
 
 ### Danceability
 
-```{r}
-get_collection_fields <- function(collection_name, field_name) {
-  collection <- get_collection(collection_name)
-  projection <- paste('{ "', field_name, '": 1 }', sep='')
-  collection$find(fields = projection)
-}
-
-result <- get_collection_fields('track_features_top_1', 'danceability')
-```
-
 ```{r fig1, fig.height = 6, fig.width = 9, fig.align = "center", include = TRUE}
+result <- get_collection_fields('track_features_top_1', 'danceability')
 p <- gplot_hist(result$danceability, name="Indice de Vailabilidad", binwidth=0.06)
 ggplotly(p)
 ```
 
+### Energy
+
+```{r fig2, fig.height = 6, fig.width = 9, fig.align = "center", include = TRUE}
+result <- get_collection_fields('track_features_top_1', 'energy')
+p <- gplot_hist(result$energy, name="Energy", binwidth=0.06)
+ggplotly(p)
+```
+
+### Loudness
+
+```{r fig3, fig.height = 6, fig.width = 9, fig.align = "center", include = TRUE}
+result <- get_collection_fields('track_features_top_1', 'loudness')
+p <- gplot_hist(result$loudness, name="loudness", binwidth=2)
+ggplotly(p)
+```
+
+### Speechiness
+
+```{r fig4, fig.height = 6, fig.width = 9, fig.align = "center", include = TRUE}
+result <- get_collection_fields('track_features_top_1', 'speechiness')
+p <- gplot_hist(result$speechiness, name="speechiness", binwidth=0.05)
+ggplotly(p)
+```
 
 
+### Acousticness
 
+```{r fig10, fig.height = 6, fig.width = 9, fig.align = "center", include = TRUE}
+result <- get_collection_fields('track_features_top_1', 'acousticness')
+p <- gplot_hist(result$acousticness, name="acousticness", binwidth=0.1)
+ggplotly(p)
+```
 
+### Instrumentalness
+
+```{r fig5, fig.height = 6, fig.width = 9, fig.align = "center", include = TRUE}
+result <- get_collection_fields('track_features_top_1', 'instrumentalness')
+p <- gplot_hist(result$instrumentalness, name="instrumentalness", binwidth=0.05)
+ggplotly(p)
+```
+
+### Liveness
+
+```{r fig6, fig.height = 6, fig.width = 9, fig.align = "center", include = TRUE}
+result <- get_collection_fields('track_features_top_1', 'liveness')
+p <- gplot_hist(result$liveness, name="liveness", binwidth=0.05)
+ggplotly(p)
+```
+
+### Valence
+
+```{r fig7, fig.height = 6, fig.width = 9, fig.align = "center", include = TRUE}
+result <- get_collection_fields('track_features_top_1', 'valence')
+p <- gplot_hist(result$valence, name="valence", binwidth=0.05)
+ggplotly(p)
+```
+
+### Tempo
+
+```{r fig8, fig.height = 6, fig.width = 9, fig.align = "center", include = TRUE}
+result <- get_collection_fields('track_features_top_1', 'tempo')
+p <- gplot_hist(result$tempo, name="tempo", binwidth=2)
+ggplotly(p)
+```
+
+### Duration (ms)
+
+```{r fig9, fig.height = 6, fig.width = 9, fig.align = "center", include = TRUE}
+result <- get_collection_fields('track_features_top_1', 'duration_ms')
+p <- gplot_hist(scale(result$duration_ms), name="duration_ms", binwidth=0.1)
+ggplotly(p)
+```
 
 
 
