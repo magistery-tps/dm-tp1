@@ -133,12 +133,18 @@ gplot_hist_from_freq_table <- function(
         aes(xintercept = min(freq_table$value), color='Mínimo'), 
         linetype=linetype, 
         size=line_size
+    ) +
+    geom_vline(
+        aes(xintercept = median(freq_table$value), color='Mediana'),
+        linetype=linetype,
+        size=line_size
     )
 
   p <- p + scale_color_manual(
     name = "Medidas de tendencia central", 
     values = c(
-      'Media'   = "red",
+      'Media'   = "black",
+      'Mediana' = 'blue',
       'Máximo'  = 'darkolivegreen4',
       'Mínimo'  = 'darkgoldenrod1'
     )
