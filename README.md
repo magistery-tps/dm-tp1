@@ -3,7 +3,7 @@
 ## Enlaces
 * **TP**
     *  [Enunciado](https://github.com/mastery-tps/dm-tp1/blob/main/docs/enunciado-tp.pdf)
-    *  [Descripción del dataset](https://github.com/mastery-tps/dm-tp1/blob/main/descripcion-dataset.md)
+    *  [Descripción del dataset](https://github.com/mastery-tps/dm-tp1/blob/main/docs/descripcion-dataset.md)
     *  [Preguntas](https://docs.google.com/document/d/1HvNfQMn5bhCcMa0JVHw9G9lG14zjBXNReRUnXjfSEh0/edit?usp=sharing)
     *  [Notebook](https://rpubs.com/adrianmarino/tp1)
     *  [GDrive](https://drive.google.com/drive/folders/1CxpEWQaq4qme6IQqG70N6eD2KVy7kMdt?usp=sharing)
