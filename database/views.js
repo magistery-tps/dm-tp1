@@ -207,7 +207,7 @@ db.track_features_top_10.aggregate([
     { 
         $bucketAuto: { 
             groupBy: "$danceability", 
-            buckets: 30000
+            buckets: 33017
         } 
     },
     {
@@ -224,7 +224,7 @@ db.track_features_top_10.aggregate([
             frequency: 1,
             min: 1,
             max: 1,
-            mean: { $avg: "$min_plus_max"  }
+            value: { $avg: "$min_plus_max"  } // Mean
        }   
     },
     { $out: "hist_top_10_danceability" }
@@ -236,7 +236,7 @@ db.track_features_top_10.aggregate([
     { 
         $bucketAuto: { 
             groupBy: "$energy", 
-            buckets: 30000
+            buckets: 33017
         } 
     },
     {
@@ -249,13 +249,13 @@ db.track_features_top_10.aggregate([
         } 
     },
     {
-       $project: {
-            frequency: 1,
-            min: 1,
-            max: 1,
-            mean: { $avg: "$min_plus_max"  }
-       }
-    },
+        $project: {
+             frequency: 1,
+             min: 1,
+             max: 1,
+             value: { $avg: "$min_plus_max"  } // Mean
+        }   
+     },
     { $out: "hist_top_10_energy" }
 ]);
 
@@ -265,7 +265,7 @@ db.track_features_top_200.aggregate([
     { 
         $bucketAuto: { 
             groupBy: "$loudness", 
-            buckets: 30000
+            buckets: 33017
         } 
     },
     {
@@ -278,13 +278,13 @@ db.track_features_top_200.aggregate([
         } 
     },
     {
-       $project: {
-            frequency: 1,
-            min: 1,
-            max: 1,
-            mean: { $avg: "$min_plus_max"  }
-       }
-    },
+        $project: {
+             frequency: 1,
+             min: 1,
+             max: 1,
+             value: { $avg: "$min_plus_max"  } // Mean
+        }   
+     },
     { $out: "hist_top_10_loudness" }
 ]);
 
@@ -293,7 +293,7 @@ db.track_features_top_10.aggregate([
     { 
         $bucketAuto: { 
             groupBy: "$speechiness", 
-            buckets: 30000
+            buckets: 33017
         } 
     },
     {
@@ -306,13 +306,13 @@ db.track_features_top_10.aggregate([
         } 
     },
     {
-       $project: {
-            frequency: 1,
-            min: 1,
-            max: 1,
-            mean: { $avg: "$min_plus_max"  }
-       }
-    },
+        $project: {
+             frequency: 1,
+             min: 1,
+             max: 1,
+             value: { $avg: "$min_plus_max"  } // Mean
+        }   
+     },
     { $out: "hist_top_10_speechiness" }
 ]);
 
@@ -322,7 +322,7 @@ db.track_features_top_10.aggregate([
     { 
         $bucketAuto: { 
             groupBy: "$acousticness", 
-            buckets: 30000
+            buckets: 33017
         } 
     },
     {
@@ -335,13 +335,13 @@ db.track_features_top_10.aggregate([
         } 
     },
     {
-       $project: {
-            frequency: 1,
-            min: 1,
-            max: 1,
-            mean: { $avg: "$min_plus_max"  }
-       }
-    },
+        $project: {
+             frequency: 1,
+             min: 1,
+             max: 1,
+             value: { $avg: "$min_plus_max"  } // Mean
+        }   
+     },
     { $out: "hist_top_10_acousticness" }
 ]);
 
@@ -350,7 +350,7 @@ db.track_features_top_10.aggregate([
     { 
         $bucketAuto: { 
             groupBy: "$instrumentalness", 
-            buckets: 30000
+            buckets: 33017
         } 
     },
     {
@@ -363,13 +363,13 @@ db.track_features_top_10.aggregate([
         } 
     },
     {
-       $project: {
-            frequency: 1,
-            min: 1,
-            max: 1,
-            mean: { $avg: "$min_plus_max"  }
-       }
-    },
+        $project: {
+             frequency: 1,
+             min: 1,
+             max: 1,
+             value: { $avg: "$min_plus_max"  } // Mean
+        }   
+     },
     { $out: "hist_top_10_instrumentalness" }
 ]);
 
@@ -378,7 +378,7 @@ db.track_features_top_10.aggregate([
     { 
         $bucketAuto: { 
             groupBy: "$liveness", 
-            buckets: 30000
+            buckets: 33017
         } 
     },
     {
@@ -391,13 +391,13 @@ db.track_features_top_10.aggregate([
         } 
     },
     {
-       $project: {
-            frequency: 1,
-            min: 1,
-            max: 1,
-            mean: { $avg: "$min_plus_max"  }
-       }
-    },
+        $project: {
+             frequency: 1,
+             min: 1,
+             max: 1,
+             value: { $avg: "$min_plus_max"  } // Mean
+        }   
+     },
     { $out: "hist_top_10_liveness" }
 ]);
 
@@ -406,7 +406,7 @@ db.track_features_top_10.aggregate([
     { 
         $bucketAuto: { 
             groupBy: "$valence", 
-            buckets: 30000
+            buckets: 33017
         } 
     },
     {
@@ -419,13 +419,13 @@ db.track_features_top_10.aggregate([
         } 
     },
     {
-       $project: {
-            frequency: 1,
-            min: 1,
-            max: 1,
-            mean: { $avg: "$min_plus_max"  }
-       }
-    },
+        $project: {
+             frequency: 1,
+             min: 1,
+             max: 1,
+             value: { $avg: "$min_plus_max"  } // Mean
+        }   
+     },
     { $out: "hist_top_10_valence" }
 ]);
 
@@ -434,7 +434,7 @@ db.track_features_top_10.aggregate([
     { 
         $bucketAuto: { 
             groupBy: "$tempo", 
-            buckets: 30000
+            buckets: 33017
         } 
     },
     {
@@ -447,13 +447,13 @@ db.track_features_top_10.aggregate([
         } 
     },
     {
-       $project: {
-            frequency: 1,
-            min: 1,
-            max: 1,
-            mean: { $avg: "$min_plus_max"  }
-       }
-    },
+        $project: {
+             frequency: 1,
+             min: 1,
+             max: 1,
+             value: { $avg: "$min_plus_max"  } // Mean
+        }   
+     },
     { $out: "hist_top_10_tempo" }
 ]);
 
@@ -463,7 +463,7 @@ db.track_features_top_10.aggregate([
     { 
         $bucketAuto: { 
             groupBy: "$duration_ms", 
-            buckets: 30000
+            buckets: 33017
         } 
     },
     {
@@ -480,8 +480,8 @@ db.track_features_top_10.aggregate([
             frequency: 1,
             min: 1,
             max: 1,
-            mean: { $avg: "$min_plus_max"  }
-       }
+            value: { $avg: "$min_plus_max"  } // Mean
+       }   
     },
     { $out: "hist_top_10_duration_ms" }
 ]);

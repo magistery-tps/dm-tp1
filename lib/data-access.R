@@ -10,3 +10,12 @@ get_collection_fields <- function(collection_name, field_name) {
   projection <- paste('{ "', field_name, '": 1 }', sep='')
   collection$find(fields = projection)
 }
+
+get_freq_table <- function(collection_name) {
+  hist_collection <- get_collection(collection_name)
+
+  hist_collection$find(
+    query = '{}', 
+    fields = '{"_id": false, "frequency": true, "value": true}'
+  )
+}
