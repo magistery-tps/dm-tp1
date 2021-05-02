@@ -1,8 +1,8 @@
 library(pacman)
 p_load(this.path)
-source(paste(this.path::this.dir(), '/lib/import.R', sep=''))
+source(paste(this.path::this.dir(), '/../lib/import.R', sep=''))
 
-import('lib/data-access')
+import('../lib/data-access')
 
 
 track_weekly_top_200 <- get_collection('track_weekly_top_200')
