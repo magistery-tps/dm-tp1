@@ -2,6 +2,13 @@ library(pacman)
 p_load(stringi, tidyverse, modeest, plotly)
 options(warn=-1)
 
+
+
+# -----------------------------------------------------------------------------
+# Descripcion: Grafian con la libreria estandar un histograma desde un array
+#              de valores.. Tambien Indica donde se encuentra: 
+#              min, max, mean, median, media truncada y modas.
+# -----------------------------------------------------------------------------
 plot_hist <- function(
   values, 
   name, 
@@ -53,6 +60,12 @@ plot_hist <- function(
 }
 
 
+
+# -----------------------------------------------------------------------------
+# Descripcion: Grafian con ggplot2 un histograma desde un array de valores.
+#              Tambien Indica donde se encuentra: min, max, mean, median,
+#              media truncada y modas.
+# -----------------------------------------------------------------------------
 gplot_hist <- function(
   values,
   ylab = "Frecuencia",
@@ -97,9 +110,11 @@ gplot_hist <- function(
 }
 
 
-
-
-
+# -----------------------------------------------------------------------------
+# Descripcion: Grafian con ggplot2 un histograma desde una table de frecuencias
+#              con las columnas: value y frequency. 
+#              Tambien Indica donde se encuentra: min, max, mean y median.
+# -----------------------------------------------------------------------------
 gplot_hist_from_freq_table <- function(
   freq_table,
   ylab = "Frecuencia",
