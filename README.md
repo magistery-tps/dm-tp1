@@ -1,12 +1,16 @@
 # Datamining  - TP 1 - Preprocesamiento de datos
 
 ## Enlaces
-*  [GDrive](https://drive.google.com/drive/folders/1CxpEWQaq4qme6IQqG70N6eD2KVy7kMdt?usp=sharing)
-*  [TP - Enunciado](https://github.com/mastery-tps/dm-tp1/blob/main/docs/enunciado-tp.pdf)
-*  [Tutorial de GIT](https://youtu.be/kEPF-MWGq1w) ([Resumen](https://youtu.be/kEPF-MWGq1w?t=1031))
-*  [Preguntas](https://docs.google.com/document/d/1HvNfQMn5bhCcMa0JVHw9G9lG14zjBXNReRUnXjfSEh0/edit?usp=sharing)
-*  [Descripción del dataset](https://github.com/mastery-tps/dm-tp1/blob/main/descripcion-dataset.md)
-*  [Mongolite User Manual](https://jeroen.github.io/mongolite/)
+* **TP**
+    *  [Enunciado](https://github.com/mastery-tps/dm-tp1/blob/main/docs/enunciado-tp.pdf)
+    *  [Descripción del dataset](https://github.com/mastery-tps/dm-tp1/blob/main/descripcion-dataset.md)
+    *  [Preguntas](https://docs.google.com/document/d/1HvNfQMn5bhCcMa0JVHw9G9lG14zjBXNReRUnXjfSEh0/edit?usp=sharing)
+    *  [Notebook](https://rpubs.com/adrianmarino/tp1)
+    *  [GDrive](https://drive.google.com/drive/folders/1CxpEWQaq4qme6IQqG70N6eD2KVy7kMdt?usp=sharing)
+
+* **Herramientas**
+    *  [Tutorial de GIT](https://youtu.be/kEPF-MWGq1w) ([Resumen](https://youtu.be/kEPF-MWGq1w?t=1031))
+    *  [Mongolite User Manual](https://jeroen.github.io/mongolite/)
 
 ## Descargar repositorio
 
