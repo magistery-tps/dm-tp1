@@ -120,15 +120,27 @@ gplot_hist_from_freq_table <- function(
     ) +
     # Plot measures of central tendency...
     geom_vline(
-      aes(xintercept=freq_table_mean(freq_table), color='Media'), 
+      aes(xintercept = freq_table_mean(freq_table), color='Media'), 
       linetype = linetype, 
       size=line_size
+    ) + 
+    geom_vline(
+        aes(xintercept = max(freq_table$value), color='Máximo'), 
+        linetype=linetype, 
+        size=line_size
+    ) +
+    geom_vline(
+        aes(xintercept = min(freq_table$value), color='Mínimo'), 
+        linetype=linetype, 
+        size=line_size
     )
 
   p <- p + scale_color_manual(
     name = "Medidas de tendencia central", 
     values = c(
-      'Media'   = "yellow"
+      'Media'   = "red",
+      'Máximo'  = 'darkolivegreen4',
+      'Mínimo'  = 'darkgoldenrod1'
     )
   )
   
