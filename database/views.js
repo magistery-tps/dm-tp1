@@ -103,7 +103,7 @@ db.track_weekly_top_10.createIndex({ "artist": 1 });
 // Indice (No unico) sobre la columns artist.
 db.track_features.createIndex({ "artist": 1 });
 
-// Join del top 1 con track features
+// Join del top 1 con track features (5251)
 db.track_features.aggregate([
     {
       $lookup:
@@ -155,7 +155,7 @@ db.track_features.aggregate([
 
 
 
-// Join del top 10 con track features
+// Join del top 10 con track features (33017)
 db.track_features.aggregate([
     {
       $lookup:
