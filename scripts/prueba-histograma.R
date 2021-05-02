@@ -1,9 +1,9 @@
 library(pacman)
 p_load(this.path, ggplot2)
-source(paste(this.path::this.dir(), '/../lib/import.R', sep=''))
 
-import('../lib/data-access')
-import('../lib/plot')
+setwd(this.path::this.dir())
+source('../lib/data-access.R')
+source('../lib/plot.R')
 
 plot_hist_collection(
   collection_name = 'hist_top_10_danceability',
@@ -59,8 +59,11 @@ plot_hist_collection(
   binwidth        = 7
 )
 
-
-
+plot_hist_collection(
+  collection_name = 'hist_top_10_duration_ms',
+  name            = 'Duration MS',
+  binwidth        = 20000
+)
 
 
 

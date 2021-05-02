@@ -2,8 +2,7 @@ library(pacman)
 p_load(stringi, tidyverse, modeest, plotly)
 options(warn=-1)
 
-import('../data-frame')
-
+source('../lib/data-frame.R')
 
 # -----------------------------------------------------------------------------
 # Descripcion: Grafian con la libreria estandar un histograma desde un array

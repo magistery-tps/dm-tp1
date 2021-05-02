@@ -2,8 +2,8 @@ library(pacman)
 p_load(stringi, tidyverse, WVPlots, DT, plotly, GGally)
 options(warn=-1)
 
-import('plot/hist')
-import('plot/pie')
+source('../lib/plot/hist.R')
+source('../lib/plot/pie.R')
 
 plot_heatmap <- function(data) {
   plot_ly(

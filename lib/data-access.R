@@ -1,7 +1,7 @@
 library(pacman)
 p_load(mongolite)
 
-import('plot')
+source('../lib/plot.R')
 
 get_collection <- function(name, db="spotify") { 
   mongo(collection=name, db = db)
