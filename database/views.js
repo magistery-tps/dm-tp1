@@ -211,12 +211,13 @@ db.track_features_top_10.aggregate([
         } 
     },
     {
-       $project: {
-           frequency: "$count",
-           min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
-           min: "$_id.min",
-           max: "$_id.max",
-       }   
+        $project: {
+             _id: 0,
+             frequency: "$count",
+             min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
+             min: "$_id.min",
+             max: "$_id.max"
+        } 
     },
     {
        $project: {
@@ -239,12 +240,13 @@ db.track_features_top_10.aggregate([
         } 
     },
     {
-       $project: {
-           frequency: "$count",
-           min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
-           min: "$_id.min",
-           max: "$_id.max",
-       } 
+        $project: {
+             _id: 0,
+             frequency: "$count",
+             min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
+             min: "$_id.min",
+             max: "$_id.max"
+        } 
     },
     {
        $project: {
@@ -267,12 +269,13 @@ db.track_features_top_200.aggregate([
         } 
     },
     {
-       $project: {
-           frequency: "$count",
-           min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
-           min: "$_id.min",
-           max: "$_id.max",
-       } 
+        $project: {
+             _id: 0,
+             frequency: "$count",
+             min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
+             min: "$_id.min",
+             max: "$_id.max"
+        } 
     },
     {
        $project: {
@@ -294,12 +297,13 @@ db.track_features_top_10.aggregate([
         } 
     },
     {
-       $project: {
-           frequency: "$count",
-           min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
-           min: "$_id.min",
-           max: "$_id.max",
-       } 
+        $project: {
+             _id: 0,
+             frequency: "$count",
+             min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
+             min: "$_id.min",
+             max: "$_id.max"
+        } 
     },
     {
        $project: {
@@ -322,12 +326,13 @@ db.track_features_top_10.aggregate([
         } 
     },
     {
-       $project: {
-           frequency: "$count",
-           min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
-           min: "$_id.min",
-           max: "$_id.max",
-       } 
+        $project: {
+             _id: 0,
+             frequency: "$count",
+             min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
+             min: "$_id.min",
+             max: "$_id.max"
+        } 
     },
     {
        $project: {
@@ -349,12 +354,13 @@ db.track_features_top_10.aggregate([
         } 
     },
     {
-       $project: {
-           frequency: "$count",
-           min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
-           min: "$_id.min",
-           max: "$_id.max",
-       } 
+        $project: {
+             _id: 0,
+             frequency: "$count",
+             min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
+             min: "$_id.min",
+             max: "$_id.max"
+        } 
     },
     {
        $project: {
@@ -376,12 +382,13 @@ db.track_features_top_10.aggregate([
         } 
     },
     {
-       $project: {
-           frequency: "$count",
-           min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
-           min: "$_id.min",
-           max: "$_id.max",
-       } 
+        $project: {
+             _id: 0,
+             frequency: "$count",
+             min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
+             min: "$_id.min",
+             max: "$_id.max"
+        } 
     },
     {
        $project: {
@@ -403,12 +410,13 @@ db.track_features_top_10.aggregate([
         } 
     },
     {
-       $project: {
-           frequency: "$count",
-           min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
-           min: "$_id.min",
-           max: "$_id.max",
-       } 
+        $project: {
+             _id: 0,
+             frequency: "$count",
+             min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
+             min: "$_id.min",
+             max: "$_id.max"
+        } 
     },
     {
        $project: {
@@ -430,12 +438,13 @@ db.track_features_top_10.aggregate([
         } 
     },
     {
-       $project: {
-           frequency: "$count",
-           min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
-           min: "$_id.min",
-           max: "$_id.max",
-       } 
+        $project: {
+             _id: 0,
+             frequency: "$count",
+             min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
+             min: "$_id.min",
+             max: "$_id.max"
+        } 
     },
     {
        $project: {
@@ -458,12 +467,13 @@ db.track_features_top_10.aggregate([
         } 
     },
     {
-       $project: {
-           frequency: "$count",
-           min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
-           min: "$_id.min",
-           max: "$_id.max",
-       } 
+        $project: {
+             _id: 0,
+             frequency: "$count",
+             min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
+             min: "$_id.min",
+             max: "$_id.max"
+        } 
     },
     {
        $project: {
