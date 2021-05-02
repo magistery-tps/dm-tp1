@@ -204,71 +204,274 @@ db.track_features.aggregate([
 
 // Histograma de danceability
 db.track_features_top_10.aggregate([
-    { $bucketAuto: { groupBy: "$danceability", buckets: 30000 } },
-    { $project: { min:  "$_id.min", max:  "$_id.max", frequence:  "$count" } },
-    { $out: "top_10_danceability_hist" }
+    { 
+        $bucketAuto: { 
+            groupBy: "$danceability", 
+            buckets: 30000
+        } 
+    },
+    {
+       $project: {
+           frequency: "$count",
+           min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
+           min: "$_id.min",
+           max: "$_id.max",
+       }   
+    },
+    {
+       $project: {
+            frequency: 1,
+            min: 1,
+            max: 1,
+            mean: { $avg: "$min_plus_max"  }
+       }   
+    },
+    { $out: "hist_top_10_danceability" }
 ]);
+
 
 // Histograma de energy
 db.track_features_top_10.aggregate([
-    { $bucketAuto: { groupBy: "$energy", buckets: 30000 } },
-    { $project: { min:  "$_id.min", max:  "$_id.max", frequence:  "$count" } },
-    { $out: "top_10_energy_hist" }
+    { 
+        $bucketAuto: { 
+            groupBy: "$energy", 
+            buckets: 30000
+        } 
+    },
+    {
+       $project: {
+           frequency: "$count",
+           min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
+           min: "$_id.min",
+           max: "$_id.max",
+       } 
+    },
+    {
+       $project: {
+            frequency: 1,
+            min: 1,
+            max: 1,
+            mean: { $avg: "$min_plus_max"  }
+       }
+    },
+    { $out: "hist_top_10_energy" }
 ]);
 
+
 // Histograma de loudness
-db.track_features_top_10.aggregate([
-    { $bucketAuto: { groupBy: "$loudness", buckets: 30000 } },
-    { $project: { min:  "$_id.min", max:  "$_id.max", frequence:  "$count" } },
-    { $out: "top_10_loudness_hist" }
+db.track_features_top_200.aggregate([
+    { 
+        $bucketAuto: { 
+            groupBy: "$loudness", 
+            buckets: 30000
+        } 
+    },
+    {
+       $project: {
+           frequency: "$count",
+           min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
+           min: "$_id.min",
+           max: "$_id.max",
+       } 
+    },
+    {
+       $project: {
+            frequency: 1,
+            min: 1,
+            max: 1,
+            mean: { $avg: "$min_plus_max"  }
+       }
+    },
+    { $out: "hist_top_10_loudness" }
 ]);
 
 // Histograma de speechiness
 db.track_features_top_10.aggregate([
-    { $bucketAuto: { groupBy: "$speechiness", buckets: 30000 } },
-    { $project: { min:  "$_id.min", max:  "$_id.max", frequence:  "$count" } },
-    { $out: "top_10_speechiness_hist" }
+    { 
+        $bucketAuto: { 
+            groupBy: "$speechiness", 
+            buckets: 30000
+        } 
+    },
+    {
+       $project: {
+           frequency: "$count",
+           min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
+           min: "$_id.min",
+           max: "$_id.max",
+       } 
+    },
+    {
+       $project: {
+            frequency: 1,
+            min: 1,
+            max: 1,
+            mean: { $avg: "$min_plus_max"  }
+       }
+    },
+    { $out: "hist_top_10_speechiness" }
 ]);
+
 
 // Histograma de acousticness
 db.track_features_top_10.aggregate([
-    { $bucketAuto: { groupBy: "$acousticness", buckets: 30000 } },
-    { $project: { min:  "$_id.min", max:  "$_id.max", frequence:  "$count" } },
-    { $out: "top_10_acousticness_hist" }
+    { 
+        $bucketAuto: { 
+            groupBy: "$acousticness", 
+            buckets: 30000
+        } 
+    },
+    {
+       $project: {
+           frequency: "$count",
+           min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
+           min: "$_id.min",
+           max: "$_id.max",
+       } 
+    },
+    {
+       $project: {
+            frequency: 1,
+            min: 1,
+            max: 1,
+            mean: { $avg: "$min_plus_max"  }
+       }
+    },
+    { $out: "hist_top_10_acousticness" }
 ]);
 
 // Histograma de instrumentalness
 db.track_features_top_10.aggregate([
-    { $bucketAuto: { groupBy: "$instrumentalness", buckets: 30000 } },
-    { $project: { min:  "$_id.min", max:  "$_id.max", frequence:  "$count" } },
-    { $out: "top_10_instrumentalness_hist" }
+    { 
+        $bucketAuto: { 
+            groupBy: "$instrumentalness", 
+            buckets: 30000
+        } 
+    },
+    {
+       $project: {
+           frequency: "$count",
+           min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
+           min: "$_id.min",
+           max: "$_id.max",
+       } 
+    },
+    {
+       $project: {
+            frequency: 1,
+            min: 1,
+            max: 1,
+            mean: { $avg: "$min_plus_max"  }
+       }
+    },
+    { $out: "hist_top_10_instrumentalness" }
 ]);
 
 // Histograma de liveness
 db.track_features_top_10.aggregate([
-    { $bucketAuto: { groupBy: "$liveness", buckets: 30000 } },
-    { $project: { min:  "$_id.min", max:  "$_id.max", frequence:  "$count" } },
-    { $out: "top_10_liveness_hist" }
+    { 
+        $bucketAuto: { 
+            groupBy: "$liveness", 
+            buckets: 30000
+        } 
+    },
+    {
+       $project: {
+           frequency: "$count",
+           min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
+           min: "$_id.min",
+           max: "$_id.max",
+       } 
+    },
+    {
+       $project: {
+            frequency: 1,
+            min: 1,
+            max: 1,
+            mean: { $avg: "$min_plus_max"  }
+       }
+    },
+    { $out: "hist_top_10_liveness" }
 ]);
 
 // Histograma de valence
 db.track_features_top_10.aggregate([
-    { $bucketAuto: { groupBy: "$valence", buckets: 30000 } },
-    { $project: { min:  "$_id.min", max:  "$_id.max", frequence:  "$count" } },
-    { $out: "top_10_valence_hist" }
+    { 
+        $bucketAuto: { 
+            groupBy: "$valence", 
+            buckets: 30000
+        } 
+    },
+    {
+       $project: {
+           frequency: "$count",
+           min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
+           min: "$_id.min",
+           max: "$_id.max",
+       } 
+    },
+    {
+       $project: {
+            frequency: 1,
+            min: 1,
+            max: 1,
+            mean: { $avg: "$min_plus_max"  }
+       }
+    },
+    { $out: "hist_top_10_valence" }
 ]);
 
 // Histograma de tempo
 db.track_features_top_10.aggregate([
-    { $bucketAuto: { groupBy: "$tempo", buckets: 30000 } },
-    { $project: { min:  "$_id.min", max:  "$_id.max", frequence:  "$count" } },
-    { $out: "top_10_tempo_hist" }
+    { 
+        $bucketAuto: { 
+            groupBy: "$tempo", 
+            buckets: 30000
+        } 
+    },
+    {
+       $project: {
+           frequency: "$count",
+           min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
+           min: "$_id.min",
+           max: "$_id.max",
+       } 
+    },
+    {
+       $project: {
+            frequency: 1,
+            min: 1,
+            max: 1,
+            mean: { $avg: "$min_plus_max"  }
+       }
+    },
+    { $out: "hist_top_10_tempo" }
 ]);
 
 
 // Histograma de duration_ms
 db.track_features_top_10.aggregate([
-    { $bucketAuto: { groupBy: "$duration_ms", buckets: 30000 } },
-    { $project: { min:  "$_id.min", max:  "$_id.max", frequence:  "$count" } },
-    { $out: "top_10_duration_ms_hist" }
+    { 
+        $bucketAuto: { 
+            groupBy: "$duration_ms", 
+            buckets: 30000
+        } 
+    },
+    {
+       $project: {
+           frequency: "$count",
+           min_plus_max: { $sum: [ "$_id.min", "$_id.max" ] },
+           min: "$_id.min",
+           max: "$_id.max",
+       } 
+    },
+    {
+       $project: {
+            frequency: 1,
+            min: 1,
+            max: 1,
+            mean: { $avg: "$min_plus_max"  }
+       }
+    },
+    { $out: "hist_top_10_duration_ms" }
 ]);
