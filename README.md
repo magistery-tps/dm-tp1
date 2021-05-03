@@ -59,6 +59,7 @@ $ cd ..
 $ mongoimport -d spotify -c track_features_top_1  --file track_features_top_1.json  --jsonArray
 $ mongoimport -d spotify -c track_features_top_10 --file track_features_top_10.json --jsonArray
 $ mongoimport -d spotify -c track_features_top_50 --file track_features_top_50.json --jsonArray
+$ mongoimport -d spotify -c track_features_top_100 --file track_features_top_100.json --jsonArray
 ```
 
 ## Vistas y nuevas colecciones
