@@ -75,7 +75,7 @@ plot_hist_collection(
 
 A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents high confidence the track is acoustic.
  
-```{r fig10, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
+```{r fig5, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
 plot_hist_collection(
   collection_name = 'hist_top_10_acousticness',
   name            = 'Acousticness',
@@ -87,7 +87,7 @@ plot_hist_collection(
 
 Predicts whether a track contains no vocals. “Ooh” and “aah” sounds are treated as instrumental in this context. Rap or spoken word tracks are clearly “vocal”. The closer the instrumentalness value is to 1.0, the greater likelihood the track contains no vocal content. Values above 0.5 are intended to represent instrumental tracks, but confidence is higher as the value approaches 1.0.
 
-```{r fig5, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
+```{r fig6, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
 plot_hist_collection(
   collection_name = 'hist_top_10_instrumentalness',
   name            = 'Instrumentalness',
@@ -99,7 +99,7 @@ plot_hist_collection(
 
 Detects the presence of an audience in the recording. Higher liveness values represent an increased probability that the track was performed live. A value above 0.8 provides strong likelihood that the track is live.
 
-```{r fig6, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
+```{r fig7, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
 plot_hist_collection(
   collection_name = 'hist_top_10_liveness',
   name            = 'Liveness',
@@ -111,7 +111,7 @@ plot_hist_collection(
 
 A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).
  
-```{r fig7, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
+```{r fig8, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
 plot_hist_collection(
   collection_name = 'hist_top_10_valence',
   name            = 'Valence',
@@ -123,8 +123,7 @@ plot_hist_collection(
 
 The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is the speed or pace of a given piece and derives directly from the average beat duration.
 
-```{r fig8, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
-result <- get_collection_fields('track_features_top_10', 'tempo')
+```{r fig9, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
 plot_hist_collection(
   collection_name = 'hist_top_10_tempo',
   name            = 'Tempo',
@@ -136,7 +135,7 @@ plot_hist_collection(
 
 The duration of the track in milliseconds.
 
-```{r fig9, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
+```{r fig10, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
 plot_hist_collection(
   collection_name = 'hist_top_10_duration_ms',
   name            = 'Duracion en Milisegundos',
@@ -144,23 +143,18 @@ plot_hist_collection(
 )
 ```
 
-## Correlaciones
-
 ```{r}
-track_features_top_1_num_colllection <- get_collection('track_features_top_10_num')
-num_features <- track_features_top_1_num_colllection$find()
-num_features.scaled <- num_features %>% mutate_all(scale)
+track_features_top_10_num_colllection <- get_collection('track_features_top_10_num')
+top_10_num_features <- track_features_top_10_num_colllection$find()
+top_10_num_features.scaled <- top_10_num_features %>% mutate_all(scale)
 ```
 
-```{r}
-names(num_features.scaled)
-```
 
-```{r fig13, fig.height = 6, fig.width = 10, fig.align = "center", include = TRUE}
-p <- num_features.scaled %>%
+```{r fig11, fig.height = 6, fig.width = 10, fig.align = "center", include = TRUE}
+p <- top_10_num_features.scaled %>%
       pivot_longer(
         ., 
-        cols = names(num_features), 
+        cols = names(top_10_num_features.scaled), 
         names_to = "Variables", 
         values_to = "Frecuencia"
       ) %>%
@@ -171,9 +165,32 @@ ggplotly(p)
 ```
 
 
-```{r fig11, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
-plot_heatmap(cov(num_features.scaled))
+## Correlaciones
+
+```{r fig12, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
+plot_heatmap(cov(top_10_num_features.scaled))
 ```
+
+
+```{r}
+track_features_top_1_num_colllection <- get_collection('track_features_top_1_num')
+top_1_num_features <- track_features_top_1_num_colllection$find()
+top_1_num_features.scaled <- top_1_num_features %>% mutate_all(scale)
+```
+
+
+```{r fig13, fig.height = 11, fig.width= 11, fig = "center"}
+plot(top_1_num_features.scaled)
+```
+
+
+```{r fig14, fig.height = 7.5, fig.width = 9.5, fig = "center"}
+p <- ggplot(top_1_num_features.scaled, aes(x = loudness, y = energy)) +
+    geom_point() + 
+  geom_smooth(method = 'loess', formula = 'y ~ x')
+ggplotly(p)
+```
+
 
 
 
