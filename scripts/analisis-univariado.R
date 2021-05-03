@@ -68,11 +68,12 @@ plot_hist_collection(
 
 # Correlación entre la variables
 
-track_features_top_1_num_colllection <- get_collection('track_features_top_1_num')
+track_features_top_1_num_colllection <- get_collection('track_features_top_10_num')
 num_features <- track_features_top_1_num_colllection$find()
 num_features.cov <- cov(scale(num_features))
 
 plot_heatmap(num_features.cov)
+
 
 
 

@@ -41,7 +41,7 @@ db.track_weekly_top_200.aggregate([
 
 // Top 1 sin duplicados (157)
 db.track_weekly_top_200.aggregate([
-    { $match: { position: { $lte: 10 } },
+    { $match: { position: { $lte: 10 } } },
     { 
        $group: {
            _id: { 
@@ -68,7 +68,7 @@ db.track_weekly_top_1.createIndex({ "artist": 1 });
 
 // Top 10 sin duplicados (1570)
 db.track_weekly_top_200.aggregate([
-    { $match: { position: {  $lte: 10 } },
+    { $match: { position: {  $lte: 10 } } },
     { 
        $group: {
            _id: { 
@@ -152,7 +152,6 @@ db.track_weekly_top_100.createIndex({ "artist": 1 });
 // ---------------------------------------------------------------------------
 // Track features
 // ---------------------------------------------------------------------------
-
 // Indice (No unico) sobre la columns artist.
 db.track_features.createIndex({ "artist": 1 });
 
@@ -204,8 +203,8 @@ db.track_features.aggregate([
     {$out: "track_features_top_1"}
 ]);
 
-// Solo features numericos del top 1
-db.track_features_top_1.aggregate([
+// Solo features numericos del top 10
+db.track_features_top_10.aggregate([
     {
          $project: {
              danceability: 1, 
@@ -221,7 +220,7 @@ db.track_features_top_1.aggregate([
              duration_ms: 1
          }
      },
-     {$out: "track_features_top_1_num"}
+     {$out: "track_features_top_10_num"}
  ]);
 
 
@@ -375,11 +374,14 @@ db.track_features.aggregate([
     { $project: { name: 0, artist2: 0 } },
     { $out: "track_features_top_100" }
 ]);
-
-
-
-
-
+//
+//
+//
+//
+//
+// ---------------------------------------------------------------------------
+// Histogramas
+// ---------------------------------------------------------------------------
 // Histograma de danceability
 db.track_features_top_10.aggregate([
     { 
