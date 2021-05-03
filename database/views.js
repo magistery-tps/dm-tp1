@@ -297,7 +297,7 @@ db.track_features.aggregate([
 
 
 
-// Join del top 50 con track features (?)
+// Join del top 50 con track features (86849)
 db.track_features.aggregate([
     {
       $lookup:
@@ -348,7 +348,7 @@ db.track_features.aggregate([
 
 
 
-// Join del top 100 con track features (?)
+// Join del top 100 con track features (134286)
 db.track_features.aggregate([
     {
       $lookup:
