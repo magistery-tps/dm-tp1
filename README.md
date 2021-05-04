@@ -52,13 +52,14 @@ $ mongoimport -d spotify -c track_weekly_top_200  --file track_weekly_top_200.js
 $ mongoimport -d spotify -c countries             --file countries.json             --jsonArray
 ```
 
-**Paso 5**: Cargamos colecciones que son joins de la anteriores:
+**Paso 5**: Cargamos colecciones que son joins de la anteriores (track_features y track_weekly_top_200):
 
 ```bash
 $ cd ..
 $ mongoimport -d spotify -c track_features_top_10  --file track_features_top_10.json  --jsonArray
 $ mongoimport -d spotify -c track_features_top_50  --file track_features_top_50.json  --jsonArray
 $ mongoimport -d spotify -c track_features_top_100 --file track_features_top_100.json --jsonArray
+$ mongoimport -d spotify -c track_features_top_200 --file track_features_top_200.json --jsonArray
 ```
 
 ## Vistas y nuevas colecciones
@@ -79,8 +80,3 @@ $ sudo systemctl restart mongod
 $ brew services start mongodb-community
 $ brew services stop  mongodb-community
 ```
-
-### Windows
-
-?
-
