@@ -155,7 +155,9 @@ db.track_weekly_top_100.createIndex({ "artist": 1 });
 // Indice (No unico) sobre la columns artist.
 db.track_features.createIndex({ "artist": 1 });
 
-// Join del top 10 con track features (33017)
+//
+// Join del top 10 con track features
+//
 db.track_features.aggregate([
     {
       $lookup:
@@ -207,8 +209,9 @@ db.track_features.aggregate([
 
 
 
-
-// Join del top 50 con track features (86849)
+//
+// Join del top 50 con track features
+//
 db.track_features.aggregate([
     {
       $lookup:
@@ -258,11 +261,9 @@ db.track_features.aggregate([
 ]);
 
 
-
-
-
-
-// Join del top 100 con track features (86849)
+//
+// Join del top 100 con track features
+//
 db.track_features.aggregate([
     {
       $lookup:
@@ -312,7 +313,56 @@ db.track_features.aggregate([
 ]);
 
 
-
+//
+// Join del top 200 con track features
+//
+db.track_features.aggregate([
+    {
+      $lookup:
+        {
+          from: "track_weekly_top_200",
+          foreignField: "track",
+          localField: "name", 
+          as: "charts"
+        }
+   },
+   {
+        $project: {
+            album_release_date: 1,
+            artist: 1,
+            name: 1,
+            danceability: 1, 
+            energy: 1,
+            loudness: 1,
+            speechiness: 1,
+            acousticness: 1,
+            instrumentalness: 1,
+            liveness: 1,
+            valence: 1,
+            tempo: 1,
+            time_signature: 1,
+            duration_ms: 1,
+            track:         { "$arrayElemAt": ["$charts.track", 0] },
+            artist2:       { "$arrayElemAt": ["$charts.artist", 0] },
+            week_start:    { "$arrayElemAt": ["$charts.week_start", 0] },
+            week_end:      { "$arrayElemAt": ["$charts.week_end", 0] },
+            position:      { "$arrayElemAt": ["$charts.position", 0] },
+            reproductions: { "$arrayElemAt": ["$charts.reproductions", 0] }
+        }
+    },
+    {
+        $match: { 
+            week_start:    { $exists:  true },
+            week_end:      { $exists:  true },
+            position:      { $exists:  true },
+            reproductions: { $exists:  true },
+            $expr:         { $eq: ["$artist", "$artist2"] },
+            $expr:         { $eq: ["$name", "$track"] }
+        }
+    },
+    { $project: { name: 0, artist2: 0 } },
+    { $out: "track_features_top_200" }
+]);
 //
 //
 //
