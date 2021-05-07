@@ -1,21 +1,27 @@
-library(pacman)
-p_load(this.path)
-source(paste(this.path::this.dir(), '/../lib/import.R', sep=''))
-
-import('../lib/data-access')
-
+source('../lib/data-access.R')
 
 track_weekly_top_200 <- get_collection('track_weekly_top_200')
 track_features <- get_collection('track_features')
 countries <- get_collection('countries')
 
 
-result <- track_features$find('{}', limit = 10)
-names(result)
+track_features_table <- track_features$find('{}')
+names(track_features_table)
 
-result <- countries$find('{}', limit = 10)
-names(result)
 
-result <- track_weekly_top_200$find('{}', limit = 10)
-names(result)
+query1 <- track_features_table %>%
+  group_by(artist, album, number, name, key, mode) %>%
+  tally() %>%
+  filter(n > 1) %>%
+  arrange(desc(n))
 
+View(query1)
+
+
+
+
+query2 <- track_features_table %>%
+  filter(artist == 'Eminem', album== 'Konvicted', name == 'Smack That')
+
+
+View(query2)

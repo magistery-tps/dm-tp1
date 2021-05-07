@@ -62,6 +62,7 @@ db.artist_audio_features_solo_art.aggregate([
             "snd_preview": "$track_preview_url",
             "url": "$external_urls_spotify",
             "disc_number": 1,
+            "album_id": 1,
             "album": "$album_name",
             "album_release_date": 1,
             "artist": "$artist_name",
