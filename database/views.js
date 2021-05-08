@@ -247,6 +247,7 @@ db.track_weekly_top_50.aggregate([
             week_end: 1,
             position: 1,
             reproductions: 1,
+
             url:                { "$arrayElemAt": ["$charts.url", 0] },
             name:               { "$arrayElemAt": ["$charts.name", 0] },
             artist:             { "$arrayElemAt": ["$charts.artist", 0] },
