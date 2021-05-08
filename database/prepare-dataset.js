@@ -45,7 +45,7 @@ db.charts.aggregate([
                 Streams: Entiendo que es la cantidad total de reproducciones de un track.
             */
             "reproductions": "$Streams",
-            "url": "$URL",
+            "track_url": "$URL",
             "week_start": 1,
             "week_end": 1
         }
@@ -162,7 +162,7 @@ db.artist_audio_features_solo_art.aggregate([
             "mode": "$mode_name"
         }
     },
-    { $out: "track_features" }
+   { $out: "track_features" }
 ]);
 
 
@@ -173,3 +173,18 @@ mongoexport -d spotify -c track_features --out track_features.json --jsonArray
 mongoexport -d spotify -c track_weekly_top_200 --out track_weekly_top_200.json --jsonArray
 
 */
+
+
+// Clave unica en track_features
+db.track_features.aggregate([
+   {
+       "$group" : {
+           _id : {
+               artist:"$artist", 
+               album_id:"$album_id", 
+               album:"$album", 
+               name:"$name"
+           }
+       }
+   }
+]);

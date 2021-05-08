@@ -37,8 +37,9 @@ db.track_weekly_top_200.aggregate([
         },
     {$out: "charts_avg"}
 ]);
-
-
+//
+//
+//
 // Top 1 sin duplicados (157)
 db.track_weekly_top_200.aggregate([
     { $match: { position: { $lte: 10 } } },
@@ -64,8 +65,9 @@ db.track_weekly_top_200.aggregate([
 ]);
 // Este indice es necesario para el join ya el lookup hace buqueda aleatoria.
 db.track_weekly_top_1.createIndex({ "artist": 1 });
-
-
+//
+//
+//
 // Top 10 sin duplicados (1570)
 db.track_weekly_top_200.aggregate([
     { $match: { position: {  $lte: 10 } } },
@@ -77,22 +79,25 @@ db.track_weekly_top_200.aggregate([
                week_end:      "$week_end",
                track:         "$track",
                artist:        "$artist",
-               reproductions: "$reproductions"
+               reproductions: "$reproductions",
+               track_url:     "$track_url"     
            },
             position:       { $last : "$position" },
             week_start:     { $last : "$week_start" },
             week_end:       { $last : "$week_end" },
             track:          { $last : "$track" },
             artist:         { $last : "$artist" },
-            reproductions:  { $last : "$reproductions" }
+            reproductions:  { $last : "$reproductions" },
+            track_url:  { $last : "$track_url" }
        }
     },
     { $out: "track_weekly_top_10" }
 ]);
 // Este indice es necesario para el join ya el lookup hace buqueda aleatoria.
 db.track_weekly_top_10.createIndex({ "artist": 1 });
-
-
+//
+//
+//
 // Top 50 sin duplicados (7850)
 db.track_weekly_top_200.aggregate([
     { $match: { position: {  $lte: 50 } } },
@@ -104,21 +109,25 @@ db.track_weekly_top_200.aggregate([
                week_end:      "$week_end",
                track:         "$track",
                artist:        "$artist",
-               reproductions: "$reproductions"
+               reproductions: "$reproductions",
+               track_url:     "$track_url"     
            },
             position:       { $last : "$position" },
             week_start:     { $last : "$week_start" },
             week_end:       { $last : "$week_end" },
             track:          { $last : "$track" },
             artist:         { $last : "$artist" },
-            reproductions:  { $last : "$reproductions" }
+            reproductions:  { $last : "$reproductions" },
+            track_url:  { $last : "$track_url" }
        }
     },
-    { $out: "track_weekly_top_50" }
+    { $out: "track_weekly_top_10" }
 ]);
 // Este indice es necesario para el join ya el lookup hace buqueda aleatoria.
 db.track_weekly_top_50.createIndex({ "artist": 1 });
-
+//
+//
+//
 // Top 100 sin duplicados (7850)
 db.track_weekly_top_200.aggregate([
     { $match: { position: {  $lte: 100 } } },
@@ -130,17 +139,19 @@ db.track_weekly_top_200.aggregate([
                week_end:      "$week_end",
                track:         "$track",
                artist:        "$artist",
-               reproductions: "$reproductions"
+               reproductions: "$reproductions",
+               track_url:     "$track_url"     
            },
             position:       { $last : "$position" },
             week_start:     { $last : "$week_start" },
             week_end:       { $last : "$week_end" },
             track:          { $last : "$track" },
             artist:         { $last : "$artist" },
-            reproductions:  { $last : "$reproductions" }
+            reproductions:  { $last : "$reproductions" },
+            track_url:  { $last : "$track_url" }
        }
     },
-    { $out: "track_weekly_top_100" }
+    { $out: "track_weekly_top_10" }
 ]);
 // Este indice es necesario para el join ya el lookup hace buqueda aleatoria.
 db.track_weekly_top_100.createIndex({ "artist": 1 });
@@ -154,7 +165,8 @@ db.track_weekly_top_100.createIndex({ "artist": 1 });
 // ---------------------------------------------------------------------------
 // Indice (No unico) sobre la columns artist.
 db.track_features.createIndex({ "artist": 1 });
-
+//
+//
 //
 // Join del top 10 con track features
 //
@@ -163,13 +175,14 @@ db.track_features.aggregate([
       $lookup:
         {
           from: "track_weekly_top_10",
-          foreignField: "track",
-          localField: "name", 
+          foreignField: "track_url",
+          localField: "url", 
           as: "charts"
         }
    },
    {
         $project: {
+            url: 1,
             album_release_date: 1,
             artist: 1,
             name: 1,
@@ -205,10 +218,8 @@ db.track_features.aggregate([
     { $project: { name: 0, artist2: 0 } },
     { $out: "track_features_top_10" }
 ]);
-
-
-
-
+//
+//
 //
 // Join del top 50 con track features
 //
@@ -217,13 +228,14 @@ db.track_features.aggregate([
       $lookup:
         {
           from: "track_weekly_top_50",
-          foreignField: "track",
-          localField: "name", 
+          foreignField: "track_url",
+          localField: "url", 
           as: "charts"
         }
    },
    {
         $project: {
+            url: 1,
             album_release_date: 1,
             artist: 1,
             name: 1,
@@ -259,8 +271,8 @@ db.track_features.aggregate([
     { $project: { name: 0, artist2: 0 } },
     { $out: "track_features_top_50" }
 ]);
-
-
+//
+//
 //
 // Join del top 100 con track features
 //
@@ -269,13 +281,14 @@ db.track_features.aggregate([
       $lookup:
         {
           from: "track_weekly_top_100",
-          foreignField: "track",
-          localField: "name", 
+          foreignField: "track_url",
+          localField: "url", 
           as: "charts"
         }
    },
    {
         $project: {
+            url: 1,
             album_release_date: 1,
             artist: 1,
             name: 1,
@@ -311,8 +324,8 @@ db.track_features.aggregate([
     { $project: { name: 0, artist2: 0 } },
     { $out: "track_features_top_100" }
 ]);
-
-
+//
+//
 //
 // Join del top 200 con track features
 //
@@ -321,13 +334,14 @@ db.track_features.aggregate([
       $lookup:
         {
           from: "track_weekly_top_200",
-          foreignField: "track",
-          localField: "name", 
+          foreignField: "track_url",
+          localField: "url", 
           as: "charts"
         }
    },
    {
         $project: {
+            url: 1,
             album_release_date: 1,
             artist: 1,
             name: 1,
@@ -363,9 +377,8 @@ db.track_features.aggregate([
     { $project: { name: 0, artist2: 0 } },
     { $out: "track_features_top_200" }
 ]);
-
-
-
+//
+//
 //
 // Solo features numericos para analizar correlacion
 //
@@ -390,7 +403,9 @@ db.track_features_top_200.aggregate([
     },
     { $out: "track_features_top_200_num" }
 ]);
-
+//
+//
+//
 db.track_features_top_100.aggregate([
     {
          $project: {

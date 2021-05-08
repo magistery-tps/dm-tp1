@@ -10,7 +10,7 @@ names(track_features_table)
 
 
 query1 <- track_features_table %>%
-  group_by(artist, album, number, name, key, mode) %>%
+  group_by(artist, album, number, name, key, mode, reproductions) %>%
   tally() %>%
   filter(n > 1) %>%
   arrange(desc(n))
