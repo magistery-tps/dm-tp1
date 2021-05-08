@@ -164,8 +164,7 @@ db.artist_audio_features_solo_art.aggregate([
     },
    { $out: "track_features" }
 ]);
-
-
+db.track_features.createIndex({ "url": 1 });
 /*
 
 mongoexport -d spotify -c track_features --out track_features.json --jsonArray
