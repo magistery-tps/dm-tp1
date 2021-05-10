@@ -443,3 +443,89 @@ db.track_features_top_100.aggregate([
      },
      { $out: "track_features_top_100_num" }
  ]);
+//
+//
+//
+//
+//
+// ---------------------------------------------------------------------------
+// Track features Agregated
+// ---------------------------------------------------------------------------
+db.getCollection('track_features').aggregate([
+    { 
+        $group: {
+            _id: {
+                name: "$name",
+                artist: "$artist",
+                album_id:  "$album_id",
+                album:  "$album"
+            },
+            "count": { "$sum": 1}
+        }
+    },
+    {
+        $project: {
+             name: "$_id.name",
+             artist: "$_id.artist",
+             album_id:  "$_id.album_id",
+             album:  "$_id.album",
+             count: 1
+        }
+    },
+    { $out: "track_features_unique_keys" }
+]);
+db.track_features_unique_keys.createIndex({ "album_id": 1 });
+db.track_features.createIndex({ "album_id": 1 });
+
+db.track_features_unique_keys.aggregate([
+    {
+      $lookup:
+        {
+          from: "track_features",
+          foreignField: "album_id",
+          localField: "album_id", 
+          as: "result"
+        }
+   },
+   {
+        $project: {
+            name:               { "$arrayElemAt": ["$result.name", 0] },
+            artist:             { "$arrayElemAt": ["$result.artist", 0] },
+            album:              { "$arrayElemAt": ["$result.album", 0] },
+            album_id:           { "$arrayElemAt": ["$result.album_id", 0] },
+            url:                { "$arrayElemAt": ["$result.url", 0] },
+            number:             { "$arrayElemAt": ["$result.number", 0] },
+            snd_preview:        { "$arrayElemAt": ["$result.snd_preview", 0] },
+            disc_number:        { "$arrayElemAt": ["$result.disc_number", 0] },
+            album_release_date: { "$arrayElemAt": ["$result.album_release_date", 0] },
+            markets:            { "$arrayElemAt": ["$result.markets", 0] },
+            danceability:       { "$arrayElemAt": ["$result.danceability", 0] },
+            energy:             { "$arrayElemAt": ["$result.energy", 0] },
+            loudness:           { "$arrayElemAt": ["$result.loudness", 0] },
+            speechiness:        { "$arrayElemAt": ["$result.speechiness", 0] },
+            acousticness:       { "$arrayElemAt": ["$result.acousticness", 0] },
+            instrumentalness:   { "$arrayElemAt": ["$result.instrumentalness", 0] },
+            liveness:           { "$arrayElemAt": ["$result.liveness", 0] },
+            valence:            { "$arrayElemAt": ["$result.valence", 0] },
+            explicit:           { "$arrayElemAt": ["$result.explicit", 0] },
+            tempo:              { "$arrayElemAt": ["$result.tempo", 0] },
+            time_signature:     { "$arrayElemAt": ["$result.time_signature", 0] },
+            duration_ms:        { "$arrayElemAt": ["$result.duration_ms", 0] },
+            key:                { "$arrayElemAt": ["$result.key", 0] },
+            mode:               { "$arrayElemAt": ["$result.mode", 0] }
+        }
+    },
+    {
+        $match: {
+            name:   "$_id.name",
+            artist: "$_id.artist",
+            album:  "$_id.album"
+        }
+    },
+    {
+        $project: {
+            _id: 0
+        }
+    },
+    { $out: "track_features_unique" }
+]);

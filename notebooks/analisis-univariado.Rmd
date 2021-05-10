@@ -68,6 +68,7 @@ top_track_features$week_end <- as.Date(
 
 ```{r}
 top_track_features <- na.omit(top_track_features)
+count(top_track_features)
 ```
 
 Separamos los features numericos:
@@ -178,7 +179,7 @@ track_features.num.scaled
 ```
 
 
-```{r fig13, fig.height = 2.5, fig.width = 5, fig.align = "center", include = TRUE}
+```{r fig13, fig.height = 2.5, fig.width = 8, fig.align = "center", include = TRUE}
 track_features.num.scaled %>%
       pivot_longer(
         ., 
@@ -198,7 +199,7 @@ num_features.cov <- cov(track_features.num.scaled)
 ```
 
 
-```{r fig14, fig.height = 5, fig.width = 5, fig.align = "center", include = TRUE}
+```{r fig14, fig.height = 5, fig.width = 7, fig.align = "center", include = TRUE}
 num_features.cov[lower.tri(num_features.cov)] <- NA
 plot_heatmap(num_features.cov)
 ```
@@ -209,7 +210,7 @@ plot(track_features.num.scaled)
 ```
 
 
-```{r fig16, fig.height = 7.5, fig.width = 9.5, fig = "center"}
+```{r fig16, fig.height = 4, fig.width = 4, fig = "center"}
 p <- ggplot(track_features.num.scaled, aes(x = loudness, y = energy)) +
     geom_point() + 
   geom_smooth(method = 'loess', formula = 'y ~ x')
