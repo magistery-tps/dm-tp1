@@ -224,4 +224,13 @@ ggplot(track_features.num, aes(x = position, y = reproductions)) +
 ```
 
 
+## Analizas outliers
+
+- Rango Intercuantil
+- Desvíos de la media
+- Z-SCore y ZScore modificado
+
+
+
+
 

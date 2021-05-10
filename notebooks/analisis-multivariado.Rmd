@@ -82,4 +82,11 @@ track_features.num.scaled <- track_features.num %>% mutate_all(scale)
 ```
 
 
+Pendientes:
+
+- Local Outlier Factor (LOF)
+- Distancia de Mahalanobis
+- Isolation Forest
+
+
 
