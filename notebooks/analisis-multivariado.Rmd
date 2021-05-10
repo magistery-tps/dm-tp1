@@ -1,0 +1,85 @@
+---
+title: 'TP I: Analisis Exploratorio'
+date: "2021-05-01"
+output:
+  html_document:
+    highlight: tango
+    theme: sandstone
+    df_print: paged
+---
+
+# Analisis Exploratorio
+
+## Analisis Multivariado
+
+Importamos la librerias necesarias
+```{r}
+library(pacman)
+p_load(stringi, tidyverse,  readr)
+source('../lib/data-access.R')
+source('../lib/plot.R')
+```
+
+### Veamos las distribuciones de cada variable numérica:
+
+Consultamos los tack featudes del top 10:
+```{r}
+top_track_features_collection <- get_collection('track_features_top_10')
+top_track_features <- top_track_features_collection$find(fields = '{
+  "_id": false,
+  "position": true,
+  "week_start": true,
+  "week_end": true,
+  "reproductions": true,
+  "name": true,
+  "artist": true,
+  "album_id": true,
+  "album": true,
+  "number": true,
+  "disc_number": true,
+  "album_release_date": true,
+  "danceability": true,
+  "energy": true,
+  "loudness": true,
+  "speechiness": true,
+  "acousticness": true,
+  "instrumentalness": true,
+  "liveness": true,
+  "valence": true,
+  "explicit": true,
+  "tempo": true,
+  "time_signature": true,
+  "duration_ms": true,
+  "key": true,
+  "mode": true
+}')
+```
+
+Convertimos las fecha a tipo date para poder comparar:
+```{r}
+top_track_features$week_start <- as.Date(
+  top_track_features$week_start, 
+  format="%Y-%m-%d"
+)
+top_track_features$week_end <- as.Date(
+  top_track_features$week_start, 
+  format="%Y-%m-%d"
+)
+```
+
+```{r}
+str(top_track_features)
+```
+
+Separamos los features numericos:
+```{r}
+track_features.num <- top_track_features %>% select_if(is.numeric)
+```
+
+Normalizamos:
+```{r}
+track_features.num.scaled <- track_features.num %>% mutate_all(scale)
+```
+
+
+

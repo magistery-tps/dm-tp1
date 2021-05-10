@@ -5,9 +5,13 @@
     *  [Enunciado](https://github.com/mastery-tps/dm-tp1/blob/main/docs/enunciado-tp.pdf)
     *  [Descripción del dataset](https://github.com/magistery-tps/dm-tp1/blob/main/docs/descripcion-dataset.md)
     *  [Preguntas](https://docs.google.com/document/d/1HvNfQMn5bhCcMa0JVHw9G9lG14zjBXNReRUnXjfSEh0/edit?usp=sharing)
-    *  [Notebook](https://rpubs.com/adrianmarino/tp1)
     *  [GDrive](https://drive.google.com/drive/folders/1CxpEWQaq4qme6IQqG70N6eD2KVy7kMdt?usp=sharing)
     *  [Dataset Original](https://drive.google.com/drive/folders/1ym38Camd1k_cU7hF0XPi8Bbvt7LcroXd)
+
+* **Notebooks**
+    * Pregunta 2:
+        *  [Analisis Univariado](https://rpubs.com/adrianmarino/tp1_univarido)
+        *  [Analisis Multivariado](https://rpubs.com/adrianmarino/tp1_multivariado)
 
 * **Herramientas**
     *  [Tutorial de GIT](https://youtu.be/kEPF-MWGq1w) ([Resumen](https://youtu.be/kEPF-MWGq1w?t=1031))
