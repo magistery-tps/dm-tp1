@@ -25,9 +25,9 @@ source('../lib/plot.R')
 Consultamos los tack featudes del top 10:
 ```{r}
 top_track_features_collection <- get_collection('track_features_top_10')
-top_track_features <- top_track_features_collection$find(fields = '{
-  "_id": false,
-  "position": true,
+top_track_features <- top_track_features_collection$find(
+query = '{ "position": { "$lte": 1 }}',
+fields = '{
   "week_start": true,
   "week_end": true,
   "reproductions": true,
@@ -48,7 +48,6 @@ top_track_features <- top_track_features_collection$find(fields = '{
   "valence": true,
   "explicit": true,
   "tempo": true,
-  "time_signature": true,
   "duration_ms": true,
   "key": true,
   "mode": true
@@ -68,53 +67,53 @@ top_track_features$week_end <- as.Date(
 ```
 
 ```{r}
-str(top_track_features)
+top_track_features <- na.omit(top_track_features)
 ```
-
 
 Separamos los features numericos:
 ```{r}
 track_features.num <- top_track_features %>% select_if(is.numeric)
 ```
 
-
 Normalizamos:
 ```{r}
 track_features.num.scaled <- track_features.num %>% mutate_all(scale)
 ```
 
-
+```{r}
+str(track_features.num.scaled)
+```
 
 ### Danceability
 
 Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.
 
-```{r fig1, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
-gplot_hist(track_features.num$danceability,name= 'Danceability', binwidth = 0.02)
+```{r fig1, fig.height = 2.5, fig.width = 5, fig.align = "center", include = TRUE}
+gplot_hist(track_features.num$danceability,name= 'Danceability', binwidth = 0.08)
 ```
 
 ### Energy
 
 Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy.
 
-```{r fig2, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
-gplot_hist(track_features.num$energy, name= 'Energy', binwidth = 0.02)
+```{r fig2, fig.height = 2.5, fig.width = 5, fig.align = "center", include = TRUE}
+gplot_hist(track_features.num$energy, name= 'Energy', binwidth = 0.05)
 ```
 
 ### Loudness
 
 The overall loudness of a track in decibels (dB). Loudness values are averaged across the entire track and are useful for comparing relative loudness of tracks. Loudness is the quality of a sound that is the primary psychological correlate of physical strength (amplitude). Values typical range between -60 and 0 db.
  
-```{r fig3, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
-gplot_hist(track_features.num$loudness, name= 'Loudness', binwidth = 0.7)
+```{r fig3, fig.height = 2.5, fig.width = 5, fig.align = "center", include = TRUE}
+gplot_hist(track_features.num$loudness, name= 'Loudness', binwidth = 0.9)
 ```
 
 ### Speechiness
 
 Speechiness detects the presence of spoken words in a track. The more exclusively speech-like the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value. Values above 0.66 describe tracks that are probably made entirely of spoken words. Values between 0.33 and 0.66 describe tracks that may contain both music and speech, either in sections or layered, including such cases as rap music. Values below 0.33 most likely represent music and other non-speech-like tracks.
 
-```{r fig4, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
-gplot_hist(track_features.num$speechiness, name= 'Speechiness', binwidth = 0.02)
+```{r fig4, fig.height = 2.5, fig.width = 5, fig.align = "center", include = TRUE}
+gplot_hist(track_features.num$speechiness, name= 'Speechiness', binwidth = 0.07)
 ```
 
 
@@ -122,15 +121,15 @@ gplot_hist(track_features.num$speechiness, name= 'Speechiness', binwidth = 0.02)
 
 A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents high confidence the track is acoustic.
  
-```{r fig5, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
-gplot_hist(track_features.num$acousticness, name= 'Acousticness', binwidth = 0.02)
+```{r fig5, fig.height = 2.5, fig.width = 5, fig.align = "center", include = TRUE}
+gplot_hist(track_features.num$acousticness, name= 'Acousticness', binwidth = 0.09)
 ```
 
 ### Instrumentalness
 
 Predicts whether a track contains no vocals. “Ooh” and “aah” sounds are treated as instrumental in this context. Rap or spoken word tracks are clearly “vocal”. The closer the instrumentalness value is to 1.0, the greater likelihood the track contains no vocal content. Values above 0.5 are intended to represent instrumental tracks, but confidence is higher as the value approaches 1.0.
 
-```{r fig6, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
+```{r fig6, fig.height = 2.5, fig.width = 5, fig.align = "center", include = TRUE}
 gplot_hist(track_features.num$instrumentalness, name= 'Instrumentalness', binwidth = 0.1)
 ```
 
@@ -138,31 +137,31 @@ gplot_hist(track_features.num$instrumentalness, name= 'Instrumentalness', binwid
 
 Detects the presence of an audience in the recording. Higher liveness values represent an increased probability that the track was performed live. A value above 0.8 provides strong likelihood that the track is live.
 
-```{r fig7, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
-gplot_hist(track_features.num$liveness, name= 'Liveness', binwidth = 0.03)
+```{r fig7, fig.height = 2.5, fig.width = 5, fig.align = "center", include = TRUE}
+gplot_hist(track_features.num$liveness, name= 'Liveness', binwidth = 0.05)
 ```
 
 ### Valence
 
 A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).
  
-```{r fig8, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
-gplot_hist(track_features.num$valence, name= 'Valence', binwidth = 0.03)
+```{r fig8, fig.height = 2.5, fig.width = 5, fig.align = "center", include = TRUE}
+gplot_hist(track_features.num$valence, name= 'Valence', binwidth = 0.08)
 ```
 
 ### Tempo
 
 The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is the speed or pace of a given piece and derives directly from the average beat duration.
 
-```{r fig9, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
-gplot_hist(track_features.num$tempo, name= 'Tempo', binwidth = 4)
+```{r fig9, fig.height = 2.5, fig.width = 5, fig.align = "center", include = TRUE}
+gplot_hist(track_features.num$tempo, name= 'Tempo', binwidth = 13)
 ```
 
 ### Duration (ms)
 
 The duration of the track in milliseconds.
 
-```{r fig10, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
+```{r fig10, fig.height = 2.5, fig.width = 5, fig.align = "center", include = TRUE}
 gplot_hist(track_features.num$duration_ms / 1000, name= 'Duracion en Milisegundos', binwidth = 20)
 ```
 
@@ -171,13 +170,16 @@ gplot_hist(track_features.num$duration_ms / 1000, name= 'Duracion en Milisegundo
 
 Numero de reproducciones de los tracks
 
-```{r fig11, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
-gplot_hist(track_features.num$reproductions, name= 'Reproductions', binwidth = 1000000)
+```{r fig11, fig.height = 2.5, fig.width = 5, fig.align = "center", include = TRUE}
+gplot_hist(track_features.num$reproductions, name= 'Reproductions', binwidth = 3000000)
+```
+```{r}
+track_features.num.scaled
 ```
 
 
-```{r fig13, fig.height = 6, fig.width = 11, fig.align = "center", include = TRUE}
-p <- track_features.num.scaled %>%
+```{r fig13, fig.height = 2.5, fig.width = 5, fig.align = "center", include = TRUE}
+track_features.num.scaled %>%
       pivot_longer(
         ., 
         cols = names(track_features.num.scaled), 
@@ -185,8 +187,7 @@ p <- track_features.num.scaled %>%
         values_to = "Frecuencia"
       ) %>%
       ggplot(aes(x = Variables, y = Frecuencia, fill = Variables)) +
-      geom_boxplot(width=0.2)
-ggplotly(p)
+      geom_boxplot(width=0.7)
 ```
 
 
@@ -194,11 +195,10 @@ ggplotly(p)
 
 ```{r}
 num_features.cov <- cov(track_features.num.scaled)
-# num_features.cov
 ```
 
 
-```{r fig14, fig.height = 6, fig.width = 8, fig.align = "center", include = TRUE}
+```{r fig14, fig.height = 5, fig.width = 5, fig.align = "center", include = TRUE}
 num_features.cov[lower.tri(num_features.cov)] <- NA
 plot_heatmap(num_features.cov)
 ```
@@ -218,9 +218,9 @@ ggplotly(p)
 
 
 ```{r fig17, fig.height = 7.5, fig.width = 7.5, fig = "center"}
-ggplot(track_features.num, aes(x = position, y = reproductions)) +
-    geom_point() + 
-  geom_smooth(method = 'loess', formula = 'y ~ x')
+# ggplot(track_features.num, aes(x = position, y = reproductions)) +
+#    geom_point() + 
+#  geom_smooth(method = 'loess', formula = 'y ~ x')
 ```
 
 
