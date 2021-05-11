@@ -162,9 +162,14 @@ db.artist_audio_features_solo_art.aggregate([
             "mode": "$mode_name"
         }
     },
-   { $out: "track_features" }
+    {
+        $addFields: { 
+          identifier: { $concat: [ "$name", "$artist", "$album_id", "$album" ] } 
+        }
+    },
+    { $out: "track_features" }
 ]);
-db.track_features.createIndex({ "url": 1 });
+db.track_features.createIndex({ "identifier": 1 });
 /*
 
 mongoexport -d spotify -c track_features --out track_features.json --jsonArray
