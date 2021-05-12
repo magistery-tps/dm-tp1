@@ -47,7 +47,12 @@ db.charts.aggregate([
             "reproductions": "$Streams",
             "track_url": "$URL",
             "week_start": 1,
-            "week_end": 1
+            "week_end": 1,
+        }
+    },
+    {
+        $addFields: { 
+          track_artist: { $concat: [ "$track", "$artist" ] } 
         }
     },
     { $out: "track_weekly_top_200" }
@@ -170,25 +175,3 @@ db.artist_audio_features_solo_art.aggregate([
     { $out: "track_features" }
 ]);
 db.track_features.createIndex({ "identifier": 1 });
-/*
-
-mongoexport -d spotify -c track_features --out track_features.json --jsonArray
-
-mongoexport -d spotify -c track_weekly_top_200 --out track_weekly_top_200.json --jsonArray
-
-*/
-
-
-// Clave unica en track_features
-db.track_features.aggregate([
-   {
-       "$group" : {
-           _id : {
-               artist:"$artist", 
-               album_id:"$album_id", 
-               album:"$album", 
-               name:"$name"
-           }
-       }
-   }
-]);

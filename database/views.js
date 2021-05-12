@@ -70,8 +70,8 @@ db.track_weekly_top_200.aggregate([
             track:          { $last : "$track" },
             artist:         { $last : "$artist" },
             reproductions:  { $last : "$reproductions" },
-            track_url:      { $last : "$url" },
-            identifier:     { $last : "$identifier" }
+            track_url:      { $last : "$track_url" },
+            track_artist:   { $last : "$track_artist" }
        }
     },
     { $project: { _id: 0 } },
@@ -87,26 +87,26 @@ db.track_weekly_top_1.createIndex({ "artist": 1 });
 db.track_weekly_top_200.aggregate([
     { $match: { position: {  $lte: 10 } } },
     { 
-       $group: {
-           _id: { 
-               position:      "$position",
-               week_start:    "$week_start",
-               week_end:      "$week_end",
-               track:         "$track",
-               artist:        "$artist",
-               reproductions: "$reproductions",
-               track_url:     "$track_url"     
-           },
-            position:       { $last : "$position" },
-            week_start:     { $last : "$week_start" },
-            week_end:       { $last : "$week_end" },
-            track:          { $last : "$track" },
-            artist:         { $last : "$artist" },
-            reproductions:  { $last : "$reproductions" },
-            track_url:      { $last : "$url" },
-            identifier:     { $last : "$identifier" }
-       }
-    },
+        $group: {
+             _id: { 
+                 position:      "$position",
+                 week_start:    "$week_start",
+                 week_end:      "$week_end",
+                 track:         "$track",
+                 artist:        "$artist",
+                 reproductions: "$reproductions",
+                 track_url:     "$track_url"     
+             },
+             position:       { $last : "$position" },
+             week_start:     { $last : "$week_start" },
+             week_end:       { $last : "$week_end" },
+             track:          { $last : "$track" },
+             artist:         { $last : "$artist" },
+             reproductions:  { $last : "$reproductions" },
+             track_url:      { $last : "$track_url" },
+             track_artist:   { $last : "$track_artist" }
+        }
+     },
     { $project: { _id: 0 } },
     { $out: "track_weekly_top_10" }
 ]);
@@ -120,25 +120,25 @@ db.track_weekly_top_10.createIndex({ "artist": 1 });
 db.track_weekly_top_200.aggregate([
     { $match: { position: {  $lte: 50 } } },
     { 
-       $group: {
-           _id: { 
-               position:      "$position",
-               week_start:    "$week_start",
-               week_end:      "$week_end",
-               track:         "$track",
-               artist:        "$artist",
-               reproductions: "$reproductions",
-               track_url:     "$track_url"     
-           },
-            position:       { $last : "$position" },
-            week_start:     { $last : "$week_start" },
-            week_end:       { $last : "$week_end" },
-            track:          { $last : "$track" },
-            artist:         { $last : "$artist" },
-            reproductions:  { $last : "$reproductions" },
-            track_url:      { $last : "$url" },
-            identifier:     { $last : "$identifier" }
-       }
+        $group: {
+             _id: { 
+                 position:      "$position",
+                 week_start:    "$week_start",
+                 week_end:      "$week_end",
+                 track:         "$track",
+                 artist:        "$artist",
+                 reproductions: "$reproductions",
+                 track_url:     "$track_url"     
+             },
+             position:       { $last : "$position" },
+             week_start:     { $last : "$week_start" },
+             week_end:       { $last : "$week_end" },
+             track:          { $last : "$track" },
+             artist:         { $last : "$artist" },
+             reproductions:  { $last : "$reproductions" },
+             track_url:      { $last : "$track_url" },
+             track_artist:   { $last : "$track_artist" }
+        }
     },
     { $project: { _id: 0 } },
     { $out: "track_weekly_top_50" }
@@ -153,25 +153,26 @@ db.track_weekly_top_50.createIndex({ "artist": 1 });
 db.track_weekly_top_200.aggregate([
     { $match: { position: {  $lte: 100 } } },
     { 
-       $group: {
-           _id: { 
-               position:      "$position",
-               week_start:    "$week_start",
-               week_end:      "$week_end",
-               track:         "$track",
-               artist:        "$artist",
-               reproductions: "$reproductions",
-               track_url:     "$track_url"     
-           },
-            position:       { $last : "$position" },
-            week_start:     { $last : "$week_start" },
-            week_end:       { $last : "$week_end" },
-            track:          { $last : "$track" },
-            artist:         { $last : "$artist" },
-            reproductions:  { $last : "$reproductions" },
-            track_url:      { $last : "$url" }
-       }
-    },
+        $group: {
+             _id: { 
+                 position:      "$position",
+                 week_start:    "$week_start",
+                 week_end:      "$week_end",
+                 track:         "$track",
+                 artist:        "$artist",
+                 reproductions: "$reproductions",
+                 track_url:     "$track_url"     
+             },
+             position:       { $last : "$position" },
+             week_start:     { $last : "$week_start" },
+             week_end:       { $last : "$week_end" },
+             track:          { $last : "$track" },
+             artist:         { $last : "$artist" },
+             reproductions:  { $last : "$reproductions" },
+             track_url:      { $last : "$track_url" },
+             track_artist:   { $last : "$track_artist" }
+        }
+     },
     { $project: { _id: 0 } },
     { $out: "track_weekly_top_100" }
 ]);
@@ -198,7 +199,7 @@ db.track_weekly_top_10.aggregate([
         {
           from: "track_features_unique",
           foreignField: "track_artist",
-          localField: "identifier", 
+          localField: "track_artist", 
           as: "result"
         }
    },
@@ -214,6 +215,7 @@ db.track_weekly_top_10.aggregate([
             week_end: 1,
             position: 1,
             reproductions: 1,
+            track_artist: 1,
             url:                { "$arrayElemAt": ["$result.url", 0] },
             name:               { "$arrayElemAt": ["$result.name", 0] },
             artist:             { "$arrayElemAt": ["$result.artist", 0] },
@@ -242,6 +244,7 @@ db.track_weekly_top_10.aggregate([
     },
     { $out: "track_features_top_10" }
 ]);
+db.track_features_top_10.createIndex({ "track_artist": 1 });
 //
 //
 //
@@ -249,22 +252,27 @@ db.track_weekly_top_10.aggregate([
 //
 db.track_weekly_top_50.aggregate([
     {
-      $lookup:
-        {
-          from: "track_features_unique",
-          foreignField: "name",
-          localField: "track", 
-          as: "result"
-        }
-   },
-   {
+        $lookup:
+          {
+            from: "track_features_unique",
+            foreignField: "track_artist",
+            localField: "track_artist", 
+            as: "result"
+          }
+     },
+     {
+          $match: { 
+              result: { $exists: true, $not: {$size: 0} } 
+          }
+     },
+     {
         $project: {
             track_url: 1,
             week_start: 1,
             week_end: 1,
             position: 1,
             reproductions: 1,
-
+            track_artist: 1,
             url:                { "$arrayElemAt": ["$result.url", 0] },
             name:               { "$arrayElemAt": ["$result.name", 0] },
             artist:             { "$arrayElemAt": ["$result.artist", 0] },
@@ -291,13 +299,9 @@ db.track_weekly_top_50.aggregate([
             mode:               { "$arrayElemAt": ["$result.mode", 0] }
         }
     },
-    { 
-        $match: { 
-            url: { $exists: true }
-        }
-    },
     { $out: "track_features_top_50" }
 ]);
+db.track_features_top_50.createIndex({ "track_artist": 1 });
 //
 //
 //
@@ -305,55 +309,56 @@ db.track_weekly_top_50.aggregate([
 //
 db.track_weekly_top_100.aggregate([
     {
-      $lookup:
-        {
-          from: "track_features",
-          foreignField: "url",
-          localField: "track_url", 
-          as: "charts"
-        }
-   },
-   {
+        $lookup:
+          {
+            from: "track_features_unique",
+            foreignField: "track_artist",
+            localField: "track_artist", 
+            as: "result"
+          }
+     },
+     {
+          $match: { 
+              result: { $exists: true, $not: {$size: 0} } 
+          }
+     },
+     {
         $project: {
             track_url: 1,
             week_start: 1,
             week_end: 1,
             position: 1,
-            reproductions: 1,            
-            
-            url:                { "$arrayElemAt": ["$charts.url", 0] },
-            name:               { "$arrayElemAt": ["$charts.name", 0] },
-            artist:             { "$arrayElemAt": ["$charts.artist", 0] },
-            album_id:           { "$arrayElemAt": ["$charts.album_id", 0] },
-            album:              { "$arrayElemAt": ["$charts.album", 0] },
-            number:             { "$arrayElemAt": ["$charts.number", 0] },
-            snd_preview:        { "$arrayElemAt": ["$charts.snd_preview", 0] },
-            disc_number:        { "$arrayElemAt": ["$charts.disc_number", 0] },
-            album_release_date: { "$arrayElemAt": ["$charts.album_release_date", 0] },
-            markets:            { "$arrayElemAt": ["$charts.markets", 0] },
-            danceability:       { "$arrayElemAt": ["$charts.danceability", 0] },
-            energy:             { "$arrayElemAt": ["$charts.energy", 0] },
-            loudness:           { "$arrayElemAt": ["$charts.loudness", 0] },
-            speechiness:        { "$arrayElemAt": ["$charts.speechiness", 0] },
-            acousticness:       { "$arrayElemAt": ["$charts.acousticness", 0] },
-            instrumentalness:   { "$arrayElemAt": ["$charts.instrumentalness", 0] },
-            liveness:           { "$arrayElemAt": ["$charts.liveness", 0] },
-            valence:            { "$arrayElemAt": ["$charts.valence", 0] },
-            explicit:           { "$arrayElemAt": ["$charts.explicit", 0] },
-            tempo:              { "$arrayElemAt": ["$charts.tempo", 0] },
-            time_signature:     { "$arrayElemAt": ["$charts.time_signature", 0] },
-            duration_ms:        { "$arrayElemAt": ["$charts.duration_ms", 0] },
-            key:                { "$arrayElemAt": ["$charts.key", 0] },
-            mode:               { "$arrayElemAt": ["$charts.mode", 0] }
-        }
-    },
-    { 
-        $match: { 
-            url: { $exists: true }
+            reproductions: 1,
+            track_artist: 1,
+            url:                { "$arrayElemAt": ["$result.url", 0] },
+            name:               { "$arrayElemAt": ["$result.name", 0] },
+            artist:             { "$arrayElemAt": ["$result.artist", 0] },
+            album_id:           { "$arrayElemAt": ["$result.album_id", 0] },
+            album:              { "$arrayElemAt": ["$result.album", 0] },
+            number:             { "$arrayElemAt": ["$result.number", 0] },
+            snd_preview:        { "$arrayElemAt": ["$result.snd_preview", 0] },
+            disc_number:        { "$arrayElemAt": ["$result.disc_number", 0] },
+            album_release_date: { "$arrayElemAt": ["$result.album_release_date", 0] },
+            markets:            { "$arrayElemAt": ["$result.markets", 0] },
+            danceability:       { "$arrayElemAt": ["$result.danceability", 0] },
+            energy:             { "$arrayElemAt": ["$result.energy", 0] },
+            loudness:           { "$arrayElemAt": ["$result.loudness", 0] },
+            speechiness:        { "$arrayElemAt": ["$result.speechiness", 0] },
+            acousticness:       { "$arrayElemAt": ["$result.acousticness", 0] },
+            instrumentalness:   { "$arrayElemAt": ["$result.instrumentalness", 0] },
+            liveness:           { "$arrayElemAt": ["$result.liveness", 0] },
+            valence:            { "$arrayElemAt": ["$result.valence", 0] },
+            explicit:           { "$arrayElemAt": ["$result.explicit", 0] },
+            tempo:              { "$arrayElemAt": ["$result.tempo", 0] },
+            time_signature:     { "$arrayElemAt": ["$result.time_signature", 0] },
+            duration_ms:        { "$arrayElemAt": ["$result.duration_ms", 0] },
+            key:                { "$arrayElemAt": ["$result.key", 0] },
+            mode:               { "$arrayElemAt": ["$result.mode", 0] }
         }
     },
     { $out: "track_features_top_100" }
 ]);
+db.track_features_top_100.createIndex({ "track_artist": 1 });
 //
 //
 //
@@ -361,55 +366,56 @@ db.track_weekly_top_100.aggregate([
 //
 db.track_weekly_top_200.aggregate([
     {
-      $lookup:
-        {
-          from: "track_features",
-          foreignField: "url",
-          localField: "track_url", 
-          as: "charts"
-        }
-   },
-   {
+        $lookup:
+          {
+            from: "track_features_unique",
+            foreignField: "track_artist",
+            localField: "track_artist", 
+            as: "result"
+          }
+     },
+     {
+          $match: { 
+              result: { $exists: true, $not: {$size: 0} } 
+          }
+     },
+     {
         $project: {
             track_url: 1,
             week_start: 1,
             week_end: 1,
             position: 1,
-            reproductions: 1,            
-
-            url:                { "$arrayElemAt": ["$charts.url", 0] },
-            name:               { "$arrayElemAt": ["$charts.name", 0] },
-            artist:             { "$arrayElemAt": ["$charts.artist", 0] },
-            album_id:           { "$arrayElemAt": ["$charts.album_id", 0] },
-            album:              { "$arrayElemAt": ["$charts.album", 0] },
-            number:             { "$arrayElemAt": ["$charts.number", 0] },
-            snd_preview:        { "$arrayElemAt": ["$charts.snd_preview", 0] },
-            disc_number:        { "$arrayElemAt": ["$charts.disc_number", 0] },
-            album_release_date: { "$arrayElemAt": ["$charts.album_release_date", 0] },
-            markets:            { "$arrayElemAt": ["$charts.markets", 0] },
-            danceability:       { "$arrayElemAt": ["$charts.danceability", 0] },
-            energy:             { "$arrayElemAt": ["$charts.energy", 0] },
-            loudness:           { "$arrayElemAt": ["$charts.loudness", 0] },
-            speechiness:        { "$arrayElemAt": ["$charts.speechiness", 0] },
-            acousticness:       { "$arrayElemAt": ["$charts.acousticness", 0] },
-            instrumentalness:   { "$arrayElemAt": ["$charts.instrumentalness", 0] },
-            liveness:           { "$arrayElemAt": ["$charts.liveness", 0] },
-            valence:            { "$arrayElemAt": ["$charts.valence", 0] },
-            explicit:           { "$arrayElemAt": ["$charts.explicit", 0] },
-            tempo:              { "$arrayElemAt": ["$charts.tempo", 0] },
-            time_signature:     { "$arrayElemAt": ["$charts.time_signature", 0] },
-            duration_ms:        { "$arrayElemAt": ["$charts.duration_ms", 0] },
-            key:                { "$arrayElemAt": ["$charts.key", 0] },
-            mode:               { "$arrayElemAt": ["$charts.mode", 0] }
-        }
-    },
-    { 
-        $match: { 
-            url: { $exists: true }
+            reproductions: 1,
+            track_artist: 1,
+            url:                { "$arrayElemAt": ["$result.url", 0] },
+            name:               { "$arrayElemAt": ["$result.name", 0] },
+            artist:             { "$arrayElemAt": ["$result.artist", 0] },
+            album_id:           { "$arrayElemAt": ["$result.album_id", 0] },
+            album:              { "$arrayElemAt": ["$result.album", 0] },
+            number:             { "$arrayElemAt": ["$result.number", 0] },
+            snd_preview:        { "$arrayElemAt": ["$result.snd_preview", 0] },
+            disc_number:        { "$arrayElemAt": ["$result.disc_number", 0] },
+            album_release_date: { "$arrayElemAt": ["$result.album_release_date", 0] },
+            markets:            { "$arrayElemAt": ["$result.markets", 0] },
+            danceability:       { "$arrayElemAt": ["$result.danceability", 0] },
+            energy:             { "$arrayElemAt": ["$result.energy", 0] },
+            loudness:           { "$arrayElemAt": ["$result.loudness", 0] },
+            speechiness:        { "$arrayElemAt": ["$result.speechiness", 0] },
+            acousticness:       { "$arrayElemAt": ["$result.acousticness", 0] },
+            instrumentalness:   { "$arrayElemAt": ["$result.instrumentalness", 0] },
+            liveness:           { "$arrayElemAt": ["$result.liveness", 0] },
+            valence:            { "$arrayElemAt": ["$result.valence", 0] },
+            explicit:           { "$arrayElemAt": ["$result.explicit", 0] },
+            tempo:              { "$arrayElemAt": ["$result.tempo", 0] },
+            time_signature:     { "$arrayElemAt": ["$result.time_signature", 0] },
+            duration_ms:        { "$arrayElemAt": ["$result.duration_ms", 0] },
+            key:                { "$arrayElemAt": ["$result.key", 0] },
+            mode:               { "$arrayElemAt": ["$result.mode", 0] }
         }
     },
     { $out: "track_features_top_200" }
 ]);
+db.track_features_top_200.createIndex({ "track_artist": 1 });
 //
 //
 //
