@@ -1,5 +1,5 @@
 library(pacman)
-p_load(this::path, tidyverse, WVPlots, GGally)
+p_load(this::path, tidyverse, WVPlots, GGally, egg)
 setwd(this.path::this.dir())
 source('../lib/data-access.R')
 
@@ -173,64 +173,15 @@ g10 <- qplot(
   formula='y ~ x', 
   method = 'loess'
 )
-
-p_load(egg)
 ggarrange(
   g1, g2, g3, g4, g5,
   g6, g7, g8, g9, g10,
   ncol=2
 )
 
-names(track_features_top_10)
-
-
-
-  
-position_features <- track_features_top_10 %>%
-    mutate(position2 = as.character(position)) %>%
-    select(
-      position2, 
-      danceability,
-      energy, 
-      loudness,
-      speechiness, 
-      acousticness,
-      instrumentalness,
-      liveness,
-      valence,
-      tempo, 
-      duration_ms
-    ) %>%
-    rename(position = position2) %>%
-    mutate_at(num_cols, scale)
-
-names(position_features)
-
-PairPlot(
-  position_features, 
-  colnames(position_features),
-  " ",
-  group_var = "position", 
-  palette=NULL
-)
-
-
-
-PairPlot(
-  position_features, 
-  colnames(position_features),
-  " ",
-  group_var = "position", 
-  palette=NULL
-)
-+
-  ggplot2::scale_color_manual(values=unique(as.factor(position_features$position)))
-
 
 
 track_features_top_200 <- get_track_features('track_features_top_50')
-
-
 r <- track_features_top_200 %>%
   group_by(position) %>%
   summarise(
@@ -245,9 +196,6 @@ r <- track_features_top_200 %>%
     tempo = median(tempo),
     duration_ms = median(duration_ms)
   )
-  
-ncol(r)
-
 PairPlot(
   r,
   colnames(r)[2:11],  " ", 
@@ -257,4 +205,49 @@ PairPlot(
 + ggplot2::scale_color_manual(values=unique(as.factor(r$position)))
 
 
+
+
+
+
+
+g_hist <- function(
+  values, 
+  name = '', 
+  font_size = 10, 
+  cant_bins = 50,
+  colour = 'blue'
+) {
+  qplot(
+    values, 
+    geom     = "histogram", 
+    main     = paste('Histograma', name),  
+    xlab     = name,
+    ylab     = 'Frecuencia', 
+    binwidth = diff(range(values)) / cant_bins,
+    fill     = "green"
+  ) + 
+    theme(text = element_text(size = font_size)) +
+    guides(fill=FALSE)
+}
+g_hist_df <- function(df, col) g_hist(as.vector(unlist(df[col])), col)
+
+
+track_features_top_200 <- get_track_features('track_features_top_200')
+
+u1 <- g_hist_df(track_features_top_200, 'danceability')
+u2 <- g_hist_df(track_features_top_200, 'energy')
+u3 <- g_hist_df(track_features_top_200, 'loudness')
+u4 <- g_hist_df(track_features_top_200, 'speechiness')
+u5 <- g_hist_df(track_features_top_200, 'acousticness')
+u6 <- g_hist_df(track_features_top_200, 'instrumentalness')
+u7 <- g_hist_df(track_features_top_200, 'liveness')
+u8 <- g_hist_df(track_features_top_200, 'valence')
+u9 <- g_hist_df(track_features_top_200, 'tempo')
+u10 <- g_hist_df(track_features_top_200, 'duration_ms')
+
+ggarrange(
+  u1, u2, u3, u4, u5,
+  u6, u7, u8, u9, u10,
+  ncol=2
+)
 
