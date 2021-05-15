@@ -1,5 +1,5 @@
 library(pacman)
-p_load(this::path, tidyverse, randomForest)
+p_load(this::path, tidyverse, randomForest, ggrepel, devtools, ggbiplot)
 setwd(this.path::this.dir())
 source('../lib/data-access.R')
 
@@ -46,3 +46,22 @@ model <- randomForest(
 )
 
 varImpPlot(model)
+
+
+
+# ------------------------------------------------------------------------------
+
+
+features <- get_tracks('track_features_top_200') %>%
+  select_if(is.numeric) %>%
+  select(-position) %>%
+  summarise_all(mean)
+names(features)
+
+
+features.pc <- prcomp(features, scale = TRUE)
+summary(features)
+
+
+
+
