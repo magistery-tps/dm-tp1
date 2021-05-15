@@ -193,6 +193,63 @@ db.track_features.createIndex({ "artist": 1 });
 //
 // Join del top 10 con track features
 //
+db.track_weekly_top_1.aggregate([
+    {
+      $lookup:
+        {
+          from: "track_features_unique",
+          foreignField: "track_artist",
+          localField: "track_artist", 
+          as: "result"
+        }
+   },
+   {
+        $match: { 
+            result: { $exists: true, $not: {$size: 0} } 
+        }
+   },
+   {
+        $project: {
+            track_url: 1,
+            week_start: 1,
+            week_end: 1,
+            position: 1,
+            reproductions: 1,
+            track_artist: 1,
+            url:                { "$arrayElemAt": ["$result.url", 0] },
+            name:               { "$arrayElemAt": ["$result.name", 0] },
+            artist:             { "$arrayElemAt": ["$result.artist", 0] },
+            album_id:           { "$arrayElemAt": ["$result.album_id", 0] },
+            album:              { "$arrayElemAt": ["$result.album", 0] },
+            number:             { "$arrayElemAt": ["$result.number", 0] },
+            snd_preview:        { "$arrayElemAt": ["$result.snd_preview", 0] },
+            disc_number:        { "$arrayElemAt": ["$result.disc_number", 0] },
+            album_release_date: { "$arrayElemAt": ["$result.album_release_date", 0] },
+            markets:            { "$arrayElemAt": ["$result.markets", 0] },
+            danceability:       { "$arrayElemAt": ["$result.danceability", 0] },
+            energy:             { "$arrayElemAt": ["$result.energy", 0] },
+            loudness:           { "$arrayElemAt": ["$result.loudness", 0] },
+            speechiness:        { "$arrayElemAt": ["$result.speechiness", 0] },
+            acousticness:       { "$arrayElemAt": ["$result.acousticness", 0] },
+            instrumentalness:   { "$arrayElemAt": ["$result.instrumentalness", 0] },
+            liveness:           { "$arrayElemAt": ["$result.liveness", 0] },
+            valence:            { "$arrayElemAt": ["$result.valence", 0] },
+            explicit:           { "$arrayElemAt": ["$result.explicit", 0] },
+            tempo:              { "$arrayElemAt": ["$result.tempo", 0] },
+            time_signature:     { "$arrayElemAt": ["$result.time_signature", 0] },
+            duration_ms:        { "$arrayElemAt": ["$result.duration_ms", 0] },
+            key:                { "$arrayElemAt": ["$result.key", 0] },
+            mode:               { "$arrayElemAt": ["$result.mode", 0] }
+        }
+    },
+    { $out: "track_features_top_1" }
+]);
+db.track_features_top_1.createIndex({ "track_artist": 1 });
+//
+//
+//
+// Join del top 10 con track features
+//
 db.track_weekly_top_10.aggregate([
     {
       $lookup:

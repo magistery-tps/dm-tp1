@@ -5,7 +5,7 @@ source('../lib/data-access.R')
 
 get_track_features <- function(collection) {
   track_features <- get_collection(collection)
-  track_features_table <- track_features$find(
+  data <- track_features$find(
     '{}', 
     fields = '{
       "_id": false,
@@ -26,6 +26,8 @@ get_track_features <- function(collection) {
   ) %>%
   drop_na %>%
   within(artist_track <- paste(artist, name, sep=' - '))
+  
+  unique(data)
 }
 
 track_features_top_10 <- get_track_features('track_features_top_10')
@@ -86,7 +88,7 @@ position_features <- track_features_top_200 %>%
     speechiness = median(speechiness),
     acousticness = median(acousticness),
     instrumentalness = median(instrumentalness),
-    livenes = median(liveness),
+    liveness = median(liveness),
     valence = median(valence),
     tempo = median(tempo),
     duration_ms = median(duration_ms)
@@ -143,7 +145,7 @@ g6 <- qplot(
 )
 g7 <- qplot(
   x=position, 
-  y=livenes, 
+  y=liveness, 
   data = position_features, 
   geom = c("point", "smooth"), 
   formula='y ~ x', 
