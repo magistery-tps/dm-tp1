@@ -3,6 +3,13 @@ p_load(this::path, tidyverse, WVPlots, GGally, egg)
 setwd(this.path::this.dir())
 source('../lib/data-access.R')
 
+num_cols <- c(
+  'danceability', 'energy', 'loudness',
+  'speechiness', 'acousticness', 
+  'instrumentalness', 'liveness',
+  'valence', 'tempo', 'duration_ms'
+)
+
 get_tracks <- function(collection) {
   collection <- get_collection(collection)
   data <- collection$find(
@@ -31,12 +38,14 @@ get_tracks <- function(collection) {
   data$week_start <- as.Date(data$week_start,format="%Y-%m-%d")
   unique(data)
 }
-
-num_cols <- c('danceability', 'energy', 'loudness', 'speechiness', 
-              'acousticness', 'instrumentalness', 'liveness',
-              'valence', 'tempo', 'duration_ms')
-
-
+#
+#
+#
+#
+#
+#
+#
+#
 track_top_10 <- get_tracks('track_features_top_1')
 
 artist_track_week_position <- track_top_10 %>%
@@ -45,9 +54,14 @@ artist_track_week_position <- track_top_10 %>%
   arrange(artist_track, week_start, position)  %>%
   select(-count)
 # View(artist_track_week_position)
-
-
-
+#
+#
+#
+#
+#
+#
+#
+#
 artist_track_reproductions <- track_top_10 %>%
   group_by(artist_track, reproductions) %>%
   tally(name = 'count') %>%
@@ -64,9 +78,14 @@ artist_track_week_position_ordered_by_reproductions <- left_join(
 arrange(desc(reproductions)) %>%
 select(artist_track, week_start, position)
 # View(artist_track_week_position_ordered_by_reproductions)
-
-
-
+#
+#
+#
+#
+#
+#
+#
+#
 # Cuales son los estuvieron menos tiempo en el top 10?
 artist_track_min_week <- artist_track_week_position %>%
   group_by(artist_track) %>%
@@ -77,7 +96,14 @@ artist_track_min_week <- artist_track_week_position %>%
 # View(artist_track_min_week)
 
 # Una semana
-
+#
+#
+#
+#
+#
+#
+#
+#
 # Cuales son los estuvieron mas tiempo en el top 10?
 artist_track_max_week <- artist_track_week_position %>%
   group_by(artist_track) %>%
@@ -86,10 +112,15 @@ artist_track_max_week <- artist_track_week_position %>%
   slice(1:5)
 
 View(artist_track_max_week)
-
+#
+#
+#
+#
+#
+#
+#
+#
 # Exitos de una semana en el top 10?
-
-
 artist_track_features_by_week_count <- function(
   artist_track_week_position,
   artist_track_features,

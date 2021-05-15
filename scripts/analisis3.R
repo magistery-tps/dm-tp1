@@ -30,12 +30,12 @@ get_tracks <- function(collection) {
 }
 
 track_features <- 
-  get_tracks('track_features_top_200') %>%
+  get_tracks('track_features_top_10') %>%
   group_by(artist_track) %>%
   summarise_if(is.numeric, median)
 
 track_features$famous <- as.factor(
-  ifelse(track_features$position <= 10, "Y","N" )
+  ifelse(track_features$position <= 1, "Y","N" )
 )
 
 model <- randomForest(
@@ -46,21 +46,6 @@ model <- randomForest(
 )
 
 varImpPlot(model)
-
-
-
-# ------------------------------------------------------------------------------
-
-
-features <- get_tracks('track_features_top_200') %>%
-  select_if(is.numeric) %>%
-  select(-position) %>%
-  summarise_all(mean)
-names(features)
-
-
-features.pc <- prcomp(features, scale = TRUE)
-summary(features)
 
 
 

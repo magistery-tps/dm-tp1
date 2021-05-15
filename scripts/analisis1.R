@@ -3,6 +3,13 @@ p_load(this::path, tidyverse, WVPlots, GGally, egg)
 setwd(this.path::this.dir())
 source('../lib/data-access.R')
 
+num_cols <-c(
+  'danceability', 'energy', 'loudness', 
+  'speechiness', 'acousticness', 
+  'instrumentalness', 'liveness',
+  'valence', 'tempo', 'duration_ms'
+)
+
 get_track_features <- function(collection) {
   track_features <- get_collection(collection)
   data <- track_features$find(
@@ -29,10 +36,6 @@ get_track_features <- function(collection) {
   
   unique(data)
 }
-
-track_features_top_10 <- get_track_features('track_features_top_10')
-nrow(track_features_top_10)
-names(track_features_top_10)
 # 
 # 
 #
@@ -40,6 +43,8 @@ names(track_features_top_10)
 # 
 # Cuales son los temas que mas veces estuvieron en el top 10?
 # 
+track_features_top_10 <- get_track_features('track_features_top_10')
+
 track_features_top_10 %>%
   group_by(artist_track) %>%
   tally(name='times') %>%
@@ -69,30 +74,18 @@ track_features_top_10 %>%
   coord_flip() +
   xlab("") +
   theme_bw()
-
-
-
-
-track_features_top_200 <- get_track_features('track_features_top_200')
-  
-num_cols <- c('danceability', 'energy', 'loudness', 'speechiness', 
-              'acousticness', 'instrumentalness', 'liveness',
-              'valence', 'tempo', 'duration_ms')
+# 
+# 
+#
+#
+#
+# Evolucion de features x position:
+# 
+track_features_top_200 <- get_track_features('track_features_top_100')
 
 position_features <- track_features_top_200 %>%
   group_by(position) %>%
-  summarise(
-    danceability = median(danceability),
-    energy = median(energy),
-    loudness = median(loudness),
-    speechiness = median(speechiness),
-    acousticness = median(acousticness),
-    instrumentalness = median(instrumentalness),
-    liveness = median(liveness),
-    valence = median(valence),
-    tempo = median(tempo),
-    duration_ms = median(duration_ms)
-  ) %>%
+  summarise_at(vars(num_cols), median) %>%
   mutate_at(num_cols, scale)
 
 g1 <- qplot(
@@ -180,38 +173,30 @@ ggarrange(
   g6, g7, g8, g9, g10,
   ncol=2
 )
-
-
-
-track_features_top_200 <- get_track_features('track_features_top_50')
-r <- track_features_top_200 %>%
+#
+#
+#
+#
+# Dispersograma de features segmentado por posicion:
+#
+r <- get_track_features('track_features_top_50') %>%
   group_by(position) %>%
-  summarise(
-    danceability = median(danceability),
-    energy = median(energy),
-    loudness = median(loudness),
-    speechiness = median(speechiness),
-    acousticness = median(acousticness),
-    instrumentalness = median(instrumentalness),
-    livenes = median(liveness),
-    valence = median(valence),
-    tempo = median(tempo),
-    duration_ms = median(duration_ms)
-  )
+  summarise_at(vars(num_cols), median)
+
 PairPlot(
   r,
   colnames(r)[2:11],  " ", 
   group_var = "position", 
   palette=NULL
-)
-+ ggplot2::scale_color_manual(values=unique(as.factor(r$position)))
-
-
-
-
-
-
-
+) + ggplot2::scale_color_manual(values=unique(as.factor(r$position)))
+#
+#
+#
+#
+#
+#
+# Histogramas:
+#
 g_hist <- function(
   values, 
   name = '', 
@@ -233,8 +218,6 @@ g_hist <- function(
 }
 g_hist_df <- function(df, col) g_hist(as.vector(unlist(df[col])), col)
 
-
-track_features_top_200 <- get_track_features('track_features_top_200')
 
 u1 <- g_hist_df(track_features_top_200, 'danceability')
 u2 <- g_hist_df(track_features_top_200, 'energy')
