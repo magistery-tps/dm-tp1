@@ -1,5 +1,5 @@
 library(pacman)
-p_load(this::path, tidyverse, WVPlots, GGally, egg)
+p_load(this::path, tidyverse, WVPlots, GGally, egg, gplots)
 setwd(this.path::this.dir())
 source('../lib/data-access.R')
 source('../lib/plot.R')
@@ -122,6 +122,7 @@ result_6_10 <-
 head(result_6_10)
 
 
+
 matrix <- data.matrix(result_6_10[2:5])
 
 heatmap.2(
@@ -138,7 +139,6 @@ heatmap.2(
   Rowv       = F, # Ordena la diagonal (en vez de dendograma)  
 )
 
-hist(table(matrix[,1]))
 
 
 
@@ -167,24 +167,22 @@ top_6_10 <- result_6_10 %>%
 head(top_6_10)
 
 
-r <- top_1_1 %>%
-  union(top_2_3) %>%
+r <- top_2_3 %>%
   union(top_4_5) %>%
   union(top_6_10)
 
 ggplot(r, aes(y=reorder(artist_track, weeks), x=weeks, fill=top_range))+
   scale_fill_manual(
-    "Rango de posiciones", 
+    "Rango de posiciones",
     values = c(
-      "1-1" = "gold",
-      "2-3" = "tomato", 
-      "4-5" = "royalblue1",
-      "6-10"="grey30"
+      "2-3" = "gold", 
+      "4-5" = "tomato",
+      "6-10"="royalblue1"
     )
   )+
   theme_light() +
   geom_bar(stat="identity") +
-  ggtitle("Permanencia en semanas en cada rango de posiciones")
+  ggtitle("Permanencia de descenso, segmentada por rango de posiciones (Weeks count)")
 
 
 artirst_track_weeks <- r %>% group_by(artist_track) %>% summarise(weeks = sum(weeks))
@@ -192,10 +190,10 @@ artirst_track_weeks <- r %>% group_by(artist_track) %>% summarise(weeks = sum(we
 gplot_hist(
   artirst_track_weeks$weeks,
   ylab = "Frecuencia",
-  name = "Permanencia (Cantidad de semanas)",
-  line_size=1.05,
-  truncated_mean_value=0.05,
-  binwidth=8,
+  name = "Permanencia de descenso (Weeks count)",
+  line_size=2,
+  truncated_mean_value=0.1,
+  binwidth=4,
   linetype="solid"
 )
 
