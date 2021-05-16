@@ -3,9 +3,11 @@
 ## Enlaces
 * **TP**
     *  [Enunciado](https://github.com/mastery-tps/dm-tp1/blob/main/docs/enunciado-tp.pdf)
-    *  [Descripción del dataset](https://github.com/magistery-tps/dm-tp1/blob/main/docs/descripcion-dataset.md)
+    *  [Informe](https://docs.google.com/document/d/1CR6HvFhVt5mKIkS2B5SlR93wrRQNvvOhcU2hu_0URRc/edit?usp=sharing)
     *  [Preguntas](https://docs.google.com/document/d/1HvNfQMn5bhCcMa0JVHw9G9lG14zjBXNReRUnXjfSEh0/edit?usp=sharing)
     *  [GDrive](https://drive.google.com/drive/folders/1CxpEWQaq4qme6IQqG70N6eD2KVy7kMdt?usp=sharing)
+* **Datos**
+    *  [Descripción del dataset](https://github.com/magistery-tps/dm-tp1/blob/main/docs/descripcion-dataset.md)
     *  [Dataset Original](https://drive.google.com/drive/folders/1ym38Camd1k_cU7hF0XPi8Bbvt7LcroXd)
 
 * **Notebooks**
