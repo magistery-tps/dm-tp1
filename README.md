@@ -10,13 +10,6 @@
     *  [Descripción del dataset](https://github.com/magistery-tps/dm-tp1/blob/main/docs/descripcion-dataset.md)
     *  [Dataset Original](https://drive.google.com/drive/folders/1ym38Camd1k_cU7hF0XPi8Bbvt7LcroXd)
 
-* **Notebooks**
-    * Pregunta 2:
-        *  [Analisis Univariado](https://rpubs.com/adrianmarino/tp1_univarido)
-        *  [Analisis Multivariado](https://rpubs.com/adrianmarino/tp1_multivariado)
-    * [Pregunta 4](https://github.com/magistery-tps/dm-tp1/blob/main/notebooks/Ejemplo_Analisis_Top10.Rmd)
-
-
 * **Herramientas**
     *  [Tutorial de GIT](https://youtu.be/kEPF-MWGq1w) ([Resumen](https://youtu.be/kEPF-MWGq1w?t=1031))
     *  [Mongolite User Manual](https://jeroen.github.io/mongolite/)
