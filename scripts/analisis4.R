@@ -182,7 +182,9 @@ ggplot(r, aes(y=reorder(artist_track, weeks), x=weeks, fill=top_range))+
   )+
   theme_light() +
   geom_bar(stat="identity") +
-  ggtitle("Permanencia de descenso, segmentada por rango de posiciones (Weeks count)")
+  ggtitle("Permanencia de descenso segmentada por posiciones") +
+  xlab("Cantidad de semanas") +
+  ylab("Artista - Tema")
 
 
 artirst_track_weeks <- r %>% group_by(artist_track) %>% summarise(weeks = sum(weeks))
@@ -190,10 +192,10 @@ artirst_track_weeks <- r %>% group_by(artist_track) %>% summarise(weeks = sum(we
 gplot_hist(
   artirst_track_weeks$weeks,
   ylab = "Frecuencia",
-  name = "Permanencia de descenso (Weeks count)",
-  line_size=2,
+  name = "Permanencia de descenso",
+  line_size=0.8,
   truncated_mean_value=0.1,
-  binwidth=4,
+  binwidth=2,
   linetype="solid"
 )
 

@@ -29,22 +29,20 @@ get_tracks <- function(collection) {
   unique()
 }
 
-track_features <- 
-  get_tracks('track_features_top_10') %>%
-  group_by(artist_track) %>%
-  summarise_if(is.numeric, median)
+track_features <- get_tracks('track_features_top_10')
+
 
 track_features$famous <- as.factor(
   ifelse(track_features$position <= 1, "Y","N" )
 )
 
-model <- randomForest(
-  x = track_features %>% select_if(is.numeric) %>% select(-position),
-  y = track_features$famous, 
-  importance=TRUE,
-  ntree=4000
-)
+track_features %>% arrange(position)
 
+
+X <- track_features %>% select_if(is.numeric) %>% select(-position)
+y = track_features$famous
+
+model <- randomForest(x=X, y=y, importance=TRUE, ntree=4000)
 varImpPlot(model)
 
 

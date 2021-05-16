@@ -81,7 +81,7 @@ track_features_top_10 %>%
 #
 # Evolucion de features x position:
 # 
-track_features_top_200 <- get_track_features('track_features_top_100')
+track_features_top_200 <- get_track_features('track_features_top_10')
 
 position_features <- track_features_top_200 %>%
   group_by(position) %>%
@@ -171,7 +171,7 @@ g10 <- qplot(
 ggarrange(
   g1, g2, g3, g4, g5,
   g6, g7, g8, g9, g10,
-  ncol=2
+  ncol=5
 )
 #
 #
