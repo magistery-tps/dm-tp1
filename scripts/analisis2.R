@@ -1,5 +1,5 @@
 library(pacman)
-p_load(this::path, tidyverse, WVPlots, GGally, egg)
+p_load(this::path, tidyverse, WVPlots, GGally, patchwork, egg)
 setwd(this.path::this.dir())
 source('../lib/data-access.R')
 
@@ -46,9 +46,9 @@ get_tracks <- function(collection) {
 #
 #
 #
-track_top_10 <- get_tracks('track_features_top_1')
+track_top_1 <- get_tracks('track_features_top_1')
 
-artist_track_week_position <- track_top_10 %>%
+artist_track_week_position <- track_top_1 %>%
   group_by(artist_track, week_start, position) %>%
   tally(name = 'count') %>%
   arrange(artist_track, week_start, position)  %>%
@@ -62,7 +62,7 @@ artist_track_week_position <- track_top_10 %>%
 #
 #
 #
-artist_track_reproductions <- track_top_10 %>%
+artist_track_reproductions <- track_top_1 %>%
   group_by(artist_track, reproductions) %>%
   tally(name = 'count') %>%
   arrange(desc(reproductions)) %>%
@@ -111,7 +111,7 @@ artist_track_max_week <- artist_track_week_position %>%
   arrange(desc(count)) %>%
   slice(1:5)
 
-View(artist_track_max_week)
+# View(artist_track_max_week)
 #
 #
 #
@@ -148,7 +148,7 @@ count <- 0
 for(i in 1:max_weeks) {
   row <- artist_track_features_by_week_count(
     artist_track_week_position,
-    track_top_10,
+    track_top_1,
     weeks_count = i
   )
   
@@ -164,7 +164,7 @@ for(i in 1:max_weeks) {
   } 
 }
 print(count)
-View(week_features)
+# View(week_features)
 
 
 
@@ -255,9 +255,58 @@ ggarrange(
 )
 
 
+min_weeks <- max(week_features$weeks)*0.8
+min_weeks
 
-# Que caracteristicas tiene estos exitos solo estan una semana vs
-# los que estan el maximo posible ?
+week_features$famous <- as.factor(
+  ifelse(week_features$weeks >= min_weeks, "Y","N" )
+)
+names(week_features)
 
+X <- week_features %>% select_if(is.numeric) %>% select(-weeks)
+y = week_features$famous
+names(X)
+
+model <- randomForest(x=X, y=y, importance=TRUE)
+varImpPlot(
+  model, 
+  main="Importancia de caracteristicas por permanencia en top 1",
+  bg = "skyblue", 
+  cex=1,
+  pch=22
+)
+
+
+
+
+
+g1 <- qplot(
+  x=weeks, 
+  y=danceability, 
+  data = week_features, 
+  geom = c("point", "smooth"), 
+  formula='y ~ x', 
+  method = 'loess'
+)
+g2 <- qplot(
+  x=weeks, 
+  y=acousticness, 
+  data = week_features, 
+  geom = c("point", "smooth"), 
+  formula='y ~ x', 
+  method = 'loess'
+)
+g3 <- qplot(
+  x=weeks, 
+  y=liveness, 
+  data = week_features, 
+  geom = c("point", "smooth"), 
+  formula='y ~ x', 
+  method = 'loess'
+)
+ggarrange(
+  g1, g2, g3,
+  ncol=3
+)
 
 

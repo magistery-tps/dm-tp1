@@ -42,9 +42,39 @@ track_features %>% arrange(position)
 X <- track_features %>% select_if(is.numeric) %>% select(-position)
 y = track_features$famous
 
-model <- randomForest(x=X, y=y, importance=TRUE, ntree=4000)
-varImpPlot(model)
+model <- randomForest(x=X, y=y, importance=TRUE)
+varImpPlot(
+  model,
+  main="Importancia de caracteristicas para permanecer en la posicion 1 (Para el top 10)",
+  bg = "skyblue", 
+  cex=1,
+  pch=22
+)
 
 
 
+
+
+
+track_features <- get_tracks('track_features_top_10')
+
+
+
+
+
+track_features$famous <- as.factor(ifelse(track_features$position <= 10, "Y","N" ))
+track_features %>% arrange(position)
+
+
+X <- track_features %>% select_if(is.numeric) %>% select(-position)
+y = track_features$famous
+
+model <- randomForest(x=X, y=y, importance=TRUE)
+varImpPlot(
+  model, 
+  main="Importancia de caracteristicas para permanecer en el top 10 (Para el top 200)",
+  bg = "skyblue", 
+  cex=1,
+  pch=22
+)
 

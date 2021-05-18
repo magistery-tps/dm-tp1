@@ -1,5 +1,5 @@
 library(pacman)
-p_load(this::path, tidyverse, WVPlots, GGally, egg)
+p_load(this::path, tidyverse, WVPlots, GGally, egg, ggpubr, randomForest)
 setwd(this.path::this.dir())
 source('../lib/data-access.R')
 
@@ -33,7 +33,6 @@ get_track_features <- function(collection) {
   ) %>%
   drop_na %>%
   within(artist_track <- paste(artist, name, sep=' - '))
-  
   unique(data)
 }
 # 
@@ -81,12 +80,11 @@ track_features_top_10 %>%
 #
 # Evolucion de features x position:
 # 
-track_features_top_200 <- get_track_features('track_features_top_10')
+track_features_top_10 <- get_track_features('track_features_top_10')
 
-position_features <- track_features_top_200 %>%
+position_features <- track_features_top_10 %>%
   group_by(position) %>%
-  summarise_at(vars(num_cols), median) %>%
-  mutate_at(num_cols, scale)
+  summarise_at(vars(num_cols), median)
 
 g1 <- qplot(
   x=position, 
@@ -171,68 +169,23 @@ g10 <- qplot(
 ggarrange(
   g1, g2, g3, g4, g5,
   g6, g7, g8, g9, g10,
-  ncol=5
-)
-#
-#
-#
-#
-# Dispersograma de features segmentado por posicion:
-#
-r <- get_track_features('track_features_top_50') %>%
-  group_by(position) %>%
-  summarise_at(vars(num_cols), median)
-
-PairPlot(
-  r,
-  colnames(r)[2:11],  " ", 
-  group_var = "position", 
-  palette=NULL
-) + ggplot2::scale_color_manual(values=unique(as.factor(r$position)))
-#
-#
-#
-#
-#
-#
-# Histogramas:
-#
-g_hist <- function(
-  values, 
-  name = '', 
-  font_size = 10, 
-  cant_bins = 50,
-  colour = 'blue'
-) {
-  qplot(
-    values, 
-    geom     = "histogram", 
-    main     = paste('Histograma', name),  
-    xlab     = name,
-    ylab     = 'Frecuencia', 
-    binwidth = diff(range(values)) / cant_bins,
-    fill     = "green"
-  ) + 
-    theme(text = element_text(size = font_size)) +
-    guides(fill=FALSE)
-}
-g_hist_df <- function(df, col) g_hist(as.vector(unlist(df[col])), col)
-
-
-u1 <- g_hist_df(track_features_top_200, 'danceability')
-u2 <- g_hist_df(track_features_top_200, 'energy')
-u3 <- g_hist_df(track_features_top_200, 'loudness')
-u4 <- g_hist_df(track_features_top_200, 'speechiness')
-u5 <- g_hist_df(track_features_top_200, 'acousticness')
-u6 <- g_hist_df(track_features_top_200, 'instrumentalness')
-u7 <- g_hist_df(track_features_top_200, 'liveness')
-u8 <- g_hist_df(track_features_top_200, 'valence')
-u9 <- g_hist_df(track_features_top_200, 'tempo')
-u10 <- g_hist_df(track_features_top_200, 'duration_ms')
-
-ggarrange(
-  u1, u2, u3, u4, u5,
-  u6, u7, u8, u9, u10,
-  ncol=2
+  ncol=5,
+  nrow=2
 )
 
+
+position_features$famous <- as.factor(ifelse(position_features$position <= 1, "Y","N" ))
+names(position_features)
+
+X <- position_features %>% select_if(is.numeric) %>% select(-position)
+names(X)
+y = position_features$famous
+
+model <- randomForest(x=X, y=y, importance=TRUE, ntree = 1000)
+varImpPlot(
+  model,
+  main="Importancia de caracteristicas para permanecer en la posicion 1  del top 10",
+  bg = "skyblue", 
+  cex=1,
+  pch=22
+)

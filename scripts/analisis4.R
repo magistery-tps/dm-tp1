@@ -1,5 +1,5 @@
 library(pacman)
-p_load(this::path, tidyverse, WVPlots, GGally, egg, gplots)
+p_load(this::path, tidyverse, egg, gplots)
 setwd(this.path::this.dir())
 source('../lib/data-access.R')
 source('../lib/plot.R')
@@ -123,25 +123,6 @@ head(result_6_10)
 
 
 
-matrix <- data.matrix(result_6_10[2:5])
-
-heatmap.2(
-  matrix,
-  cellnote   = matrix,
-  trace      = "none",        
-  notecol    = "black", 
-  main       = "Cantidad de semanas por rango de posiciones", 
-  margins    = c(11, 11),  
-  col        = terrain.colors(3, rev = T),  
-  dendrogram = "none",
-  labRow     = result_6_10$artist_track,
-  symm       = T, 
-  Rowv       = F, # Ordena la diagonal (en vez de dendograma)  
-)
-
-
-
-
 top_1_1 <- result_6_10 %>% 
   select(artist_track, weeks.top1) %>%
   rename(weeks = 'weeks.top1') %>%
@@ -199,6 +180,14 @@ gplot_hist(
   linetype="solid"
 )
 
+
+r <- artirst_track_weeks %>% 
+  left_join(track_top_10, b='artist_track') %>%
+  group_by(artist) %>%
+  summarise(count = n()) %>%
+  arrange(desc(count))
+
+View(r)
 
 
 
