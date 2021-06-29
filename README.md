@@ -53,6 +53,8 @@ $ mongoimport -d spotify -c artist_audio_features_solo_art  --file artist_audio_
 $ mongoimport -d spotify -c track_features                  --file track_features.json                  --jsonArray
 $ mongoimport -d spotify -c track_weekly_top_200            --file track_weekly_top_200.json            --jsonArray
 $ mongoimport -d spotify -c countries                       --file countries.json                       --jsonArray
+$ mongoimport -d spotify -c lyrics-spanish  --file lyrics-spanish.json
+$ mongoimport -d spotify -c lyrics-english  --file lyrics-english.json
 ```
 
 ## Vistas y nuevas colecciones
