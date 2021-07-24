@@ -3,7 +3,7 @@
 ## Enlaces
 * **TP**
     *  [Enunciado](https://github.com/mastery-tps/dm-tp1/blob/main/docs/enunciado-tp.pdf)
-    *  [Informe](https://docs.google.com/document/d/1CR6HvFhVt5mKIkS2B5SlR93wrRQNvvOhcU2hu_0URRc/edit?usp=sharing)
+    *  [Informe](https://github.com/magistery-tps/dm-tp1/blob/main/docs/Data%20Mining%20-%20TP%20N%C2%B01%20-%20Grupo%205.pdf)
     *  [Preguntas](https://docs.google.com/document/d/1HvNfQMn5bhCcMa0JVHw9G9lG14zjBXNReRUnXjfSEh0/edit?usp=sharing)
     *  [GDrive](https://drive.google.com/drive/folders/1CxpEWQaq4qme6IQqG70N6eD2KVy7kMdt?usp=sharing)
 * **Datos**
