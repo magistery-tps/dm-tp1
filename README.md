@@ -4,7 +4,6 @@
 * **TP**
     *  [Enunciado](https://github.com/mastery-tps/dm-tp1/blob/main/docs/enunciado-tp.pdf)
     *  [Informe](https://github.com/magistery-tps/dm-tp1/blob/main/docs/Data%20Mining%20-%20TP%20N%C2%B01%20-%20Grupo%205.pdf)
-    *  [GDrive](https://drive.google.com/drive/folders/1CxpEWQaq4qme6IQqG70N6eD2KVy7kMdt?usp=sharing)
 * **Datos**
     *  [Descripción del dataset](https://github.com/magistery-tps/dm-tp1/blob/main/docs/descripcion-dataset.md)
     *  [Dataset Original](https://drive.google.com/drive/folders/1ym38Camd1k_cU7hF0XPi8Bbvt7LcroXd)
