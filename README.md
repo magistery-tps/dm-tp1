@@ -14,7 +14,7 @@
 
 ## Descargar repositorio
 
-**Paso 1**: Instalar [git](https://git-scm.com/downloads).
+Descargar el projecto desde [Aqui](https://github.com/magistery-tps/aid-tp/archive/refs/heads/main.zip).
 
 **Paso 2**:  Ahora si  clonamos el repositorio.
 
